@@ -1,0 +1,9 @@
+.instructions-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    max-width: 375px;;
+    margin: auto;
+}

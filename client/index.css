@@ -1,0 +1,11 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: #fff;
+    background-image: url("./images/fondo.png");
+    font-family: 'Acme', sans-serif;
+}
+

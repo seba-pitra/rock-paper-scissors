@@ -1,0 +1,19 @@
+.contaner-result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.score-container {
+    width: 260px;
+    border: solid 10px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-family: 'Odibee Sans', sans-serif;
+}
+
+.results {
+    display: block;
+    text-align: right;
+} 
