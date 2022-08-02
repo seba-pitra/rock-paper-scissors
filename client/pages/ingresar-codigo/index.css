@@ -1,0 +1,9 @@
+.codigo {
+    width: 322px;
+    height: 87px;
+    border: solid 5px;
+    background-color: #fff;
+    font-size: 45px;
+    text-align: center;
+    font-family: 'Acme', sans-serif;
+}

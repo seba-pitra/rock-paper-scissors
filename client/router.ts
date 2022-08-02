@@ -5,8 +5,17 @@ import { initPageJugada } from "./pages/jugada";
 import { pageGanaste } from "./pages/ganaste";
 import { initPerdistePage } from "./pages/perdiste";
 import { initEmpatePage } from "./pages/empate";
+import { initGetInSala } from "./pages/ingresar-codigo";
 
 const routes = [ 
+    {
+        path: /\/welcome/,
+        component: initPageWelcome
+    },
+    {
+        path: /\/get-in/,
+        component: initGetInSala
+    },
     {
         path: /\/welcome/,
         component: initPageWelcome

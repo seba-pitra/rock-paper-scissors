@@ -1,4 +1,4 @@
-export function initPageWelcome(params) {
+export function initGetInSala(params) {
     const div = document.createElement("div");
     div.className = "welcome-container"
 
@@ -6,7 +6,7 @@ export function initPageWelcome(params) {
       <custom-text variant="title">
          Piedra, Papel ó Tijeras
       </custom-text>
-      <custom-boton class="new-game">Nuevo Juego</custom-boton>
+      <input class="codigo" placeholder="código"/>
       <custom-boton class="get-in">Ingresar a sala</custom-boton>
       <div class="welcome-hands-container">
          <custom-tijera></custom-tijera>
@@ -15,18 +15,11 @@ export function initPageWelcome(params) {
       </div>
     `
 
-    const firstButton:any = div.querySelector(".new-game");
-    firstButton.addEventListener("click", (e) => {
-      e.preventDefault()
-      console.log(firstButton.innerHTML);
-      params.goTo("./instruction")
-    })
-
     const secondButton:any = div.querySelector(".get-in");
     secondButton.addEventListener("click", (e) => {
       e.preventDefault()
       console.log(secondButton.innerHTML);
-      params.goTo("./get-in")
+      params.goTo("./instruction")
     })
 
     
