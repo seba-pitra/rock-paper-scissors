@@ -2,6 +2,10 @@ type Jugada = "piedra" |"papel" | "tijeras";
 
 export const state = {
     data:{
+        playerOne: "",
+        playerTwo: "",
+        rtdbData: {},
+        roomId: "",
         currentGame: {
             computerPlay:"",
             myPlay:""
@@ -37,4 +41,5 @@ export const state = {
             return "ganaste"
         }
     },
+    
 }

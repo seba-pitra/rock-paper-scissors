@@ -19,7 +19,7 @@ export function initGetInSala(params) {
     secondButton.addEventListener("click", (e) => {
       e.preventDefault()
       console.log(secondButton.innerHTML);
-      params.goTo("./instruction")
+      params.goTo("./wait-room")
     })
 
     

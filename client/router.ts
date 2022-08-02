@@ -6,6 +6,9 @@ import { pageGanaste } from "./pages/ganaste";
 import { initPerdistePage } from "./pages/perdiste";
 import { initEmpatePage } from "./pages/empate";
 import { initGetInSala } from "./pages/ingresar-codigo";
+import { initWaitPlayer } from "./pages/wait-player";
+import { initGetName } from "./pages/get-name";
+import { initWaitRoom } from "./pages/wait-room";
 
 const routes = [ 
     {
@@ -15,6 +18,18 @@ const routes = [
     {
         path: /\/get-in/,
         component: initGetInSala
+    },
+    {
+        path: /\/get-name/,
+        component: initGetName
+    },
+    {
+        path: /\/wait-player/,
+        component: initWaitPlayer
+    },
+    {
+        path: /\/wait-room/,
+        component: initWaitRoom
     },
     {
         path: /\/welcome/,

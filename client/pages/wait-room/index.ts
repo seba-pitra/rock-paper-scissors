@@ -1,13 +1,10 @@
-export function initWaitPlayer(params) {
+export function initWaitRoom(params) {
     const div = document.createElement("div");
     div.className = "welcome-container"
 
     div.innerHTML = `
       <custom-text class="text-container">
-        Comparte el código con tu contricante:
-        <custom-text variant="title">
-           77HH88
-        </custom-text>
+         Esperando que Fede presione ¡Jugar!
       </custom-text>
       <div class="welcome-hands-container">
          <custom-tijera></custom-tijera>
