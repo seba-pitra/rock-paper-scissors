@@ -14,6 +14,7 @@ app.use(express.json())
 app.use(cors())
 
 //agrega user a firestore
+//cuando agregue un segundo jugador va a pasar por este endpoint primero 
 app.post('/signup', async (req, res) => {
     const {nombre} = req.body
     usersCollection.where("nombre", "==", nombre)
@@ -43,15 +44,15 @@ app.post('/rooms', (req, res) => {
     usersCollection
       .doc(userId.toString())
       .get()
-      .then(doc => {
-        if(doc.exists) { 
+      .then(docUser => {
+        if(docUser.exists) { 
             const roomRef = rtdb.ref("rooms/" + uuidv4())
             roomRef.set({
-                owner: userId
+                playerOne: userId
             })
             .then(() => {
                 const roomLongId = roomRef.key;
-                const roomId = ( 1000 + Math.floor(Math.random() * 999) ).toString();
+                const roomId = ( 10000 + Math.floor(Math.random() * 9999) ).toString();
                 roomsCollection
                    .doc(roomId)
                    .set({
@@ -88,6 +89,40 @@ app.post('/rtdbRoomId', (req, res) => {
         })
 });
 
+// agrega segundo jugador a rtdbRoom
+app.post('/new-player', (req,res) => {
+    const {roomId} = req.body;
+    const {userId} = req.body
+    usersCollection
+        .doc(userId)
+        .get()
+        .then(doc => {
+            roomsCollection
+               .doc(roomId)
+               .get()
+               .then(doc => {
+                   const rtdbRoom = doc.data()
+                   const rtdbRoomId = rtdbRoom.rtdbRoom
+                   const roomRef = rtdb.ref("/rooms/" + rtdbRoomId )
+                   roomRef.update({
+                    playerTwo: userId
+                })
+                   .then(() => {
+                    res.json({
+                        message:"ok"
+                })
+            })
+        })     
+    })
+})
+
+//Vi que marce adentro dela rtdbRoomId pone una propiedad q se llama "current game" q tiene a los dos jugadores adentro
+//vuelvo y veo que onda eso, si lo hago o no
+
+//Ahora tengo que acceder al objeto de los players en la rtdb y agregarle los status com online, choise,name y start
+app.post("/status", (req,res) => {
+    
+})
 
 app.listen(port, () => {
     console.log("El puerto funciona en el numero:" + port);
