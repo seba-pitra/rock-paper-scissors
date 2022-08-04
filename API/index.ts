@@ -10,18 +10,19 @@ const app = express();
 const usersCollection = firestore.collection("users")
 const roomsCollection = firestore.collection("rooms")
 
-app.use(express.json()) 
 app.use(cors())
+app.use(express.json()) 
+app.use(express.static("dist"))
 
 //agrega user a firestore
-//cuando agregue un segundo jugador va a pasar por este endpoint primero 
+//cuando agregue un segundo jugador va a pasar por este endpoint primero para obtener el userId para interactuar en "/new-player"
 app.post('/signup', async (req, res) => {
     const {nombre} = req.body
     usersCollection.where("nombre", "==", nombre)
     .get()
     .then(searchResponse => {
         if(searchResponse) {
-            usersCollection.add({
+            usersCollection.add({ 
                 nombre,
             }).then((newUserRef) => {
                 const user = newUserRef.id                
@@ -73,7 +74,7 @@ app.post('/rooms', (req, res) => {
 });
 
 //consigue el id de rtdbroom
-app.post('/rtdbRoomId', (req, res) => {
+app.get('/rtdbRoomId', (req, res) => {
     const {roomId} = req.body
     roomsCollection
         .doc(roomId)
@@ -101,13 +102,14 @@ app.post('/new-player', (req,res) => {
                .doc(roomId)
                .get()
                .then(doc => {
+                const user = userId
                    const rtdbRoom = doc.data()
                    const rtdbRoomId = rtdbRoom.rtdbRoom
-                   const roomRef = rtdb.ref("/rooms/" + rtdbRoomId )
+                   const roomRef = rtdb.ref("/rooms/" + rtdbRoomId)
                    roomRef.update({
-                    playerTwo: userId
+                    playerTwo: user
                 })
-                   .then(() => {
+                .then(() => {
                     res.json({
                         message:"ok"
                 })
@@ -116,12 +118,66 @@ app.post('/new-player', (req,res) => {
     })
 })
 
-//Vi que marce adentro dela rtdbRoomId pone una propiedad q se llama "current game" q tiene a los dos jugadores adentro
-//vuelvo y veo que onda eso, si lo hago o no
-
-//Ahora tengo que acceder al objeto de los players en la rtdb y agregarle los status com online, choise,name y start
+//agregar los status (online y start) a los players
 app.post("/status", (req,res) => {
-    
+    const {roomId} = req.body
+    const {name} = req.body
+    const {player} = req.body
+    const {online} = req.body
+    const {start} = req.body
+
+    roomsCollection
+        .doc(roomId)
+        .get()
+        .then(doc => {
+            if (player == 1) {
+                const rtdbRoom = doc.data()
+                const rtdbRoomId = rtdbRoom.rtdbRoom
+                const roomRef = rtdb.ref("/rooms/" + rtdbRoomId + "/playerOne");
+                roomRef.update({
+                    online: Boolean(online),
+                    start: Boolean(start)
+                })    
+            }
+            if (player == 2) {
+                const rtdbRoom = doc.data()
+                const rtdbRoomId = rtdbRoom.rtdbRoom
+                const roomRef = rtdb.ref("/rooms/" + rtdbRoomId + "/playerTwo");
+                roomRef.update({
+                    online: Boolean(online),
+                    start: Boolean(start)
+                })    
+            }
+        }).then(() => res.json({ message: "ok" }))
+})
+
+//Agrega lo que eligio el jugador ("piedra, papel o tijera"). La eleccion la recibo en "req.body"
+app.post("/play", (req,res) => {
+    const {roomId} = req.body
+    const {player} = req.body
+    const {choise} = req.body
+
+    roomsCollection
+        .doc(roomId)
+        .get()
+        .then(doc => {
+            if (player == 1) {
+                const rtdbRoom = doc.data()
+                const rtdbRoomId = rtdbRoom.rtdbRoom
+                const roomRef = rtdb.ref("/rooms/" + rtdbRoomId + "/playerOne");
+                roomRef.update({
+                    choise: choise
+                })    
+            }
+            if (player == 2) {
+                const rtdbRoom = doc.data()
+                const rtdbRoomId = rtdbRoom.rtdbRoom
+                const roomRef = rtdb.ref("/rooms/" + rtdbRoomId + "/playerTwo");
+                roomRef.update({
+                    choise: choise
+                })    
+            }
+        }).then(() => res.json({ message: "ok" }))
 })
 
 app.listen(port, () => {
