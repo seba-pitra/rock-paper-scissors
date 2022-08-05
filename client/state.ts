@@ -1,5 +1,6 @@
 import {rtdb} from "../API/rtdb"
 import map from "lodash/map"
+import { json } from "express";
 
 type Jugada = "piedra" |"papel" | "tijeras";
 
@@ -24,22 +25,26 @@ export const state = {
         }
     },
     listeners:[],
+    init() {
+        const lastStorage = localStorage.getItem("state")
+        return lastStorage;
+    },
     //funciona
     getState() {
         return this.data;
-    },
-    //Funciona
-    suscribe(cb: (any) => any) {
-        this.listeners.push(cb);
     },
     //Funciona
     setState(newState) {
         this.data = newState;
         for (const cb of this.listeners) {
             cb();  
-        }
+        }        
+        localStorage.setItem("state", JSON.stringify(newState))
         console.log("soy el state,cambié",this.getState());
-        
+    },
+    //Funciona
+    suscribe(cb: (any) => any) {
+        this.listeners.push(cb);
     },
     //Funciona
     setName(name:string, player:number) {
@@ -82,9 +87,8 @@ export const state = {
                 this.setState(cs)
             })
         }
-        
     },
-    //Crea room. Se ejecuta en "this.signin()"
+    //Crea room. Se ejecuta en "this.signin()" en "player == 1"
     //Funciona
     askNewRoom() {
         const cs = this.getState();
@@ -101,9 +105,13 @@ export const state = {
             })
         }
     },
+
+
+
+    //Las siguientes no funcionan si les paso el roomId que esta en la data del state. El "roomId" llega vacio O.o
+
+
     //Una vez que existe la room(firestore) con su ID, el 2do jugador podra acceder a ella
-    //Funciona. Creo que tanto el endpoint como esta funcion necesitan un nombre.
-    //Hasta ahora no subi a la BD ningun nombre
     accessToRoom() {
         const cs = this.getState();
         
@@ -111,15 +119,39 @@ export const state = {
             method: "post",
             headers: { 'content-type': "application/json" },
             body: JSON.stringify({
-                roomId: "cs.roomId",
+                roomId: "13412",
             })
         })
         .then(res => res.json())
     },
     //¿El otro jugador esta en la sala de instruciones? entonces esta "online:true"
     //¿El 2do jugador apretó jugar? Entonces está "start:true"
-    setStatus() {
-
+    setStatus(params:{ player:number, online:boolean, start:boolean }) {
+        const cs = this.getState();
+        
+        fetch(API_BASE_URL + "/status", {
+            method: "post",
+            headers: { 'content-type': "application/json" },
+            body: JSON.stringify({
+                roomId: "12658",
+                player: params.player,
+                online: params.online,
+                start: params.start
+            })
+        })
+    },
+    //mandarle al back quien juega(player 1 o 2) y qué eligió.
+    setPlay(params: { player:number, choise:string }) {
+        const cs = this.getState();
+        fetch(API_BASE_URL + "/play", {
+            method: "post",
+            headers: { 'content-type': "application/json" },
+            body: JSON.stringify({
+                roomId: "12658",
+                player: params.player,
+                choise: params.choise
+            })
+        })
     },
     whoWins(myPlay:Jugada, computerPlay:Jugada) {
         if (computerPlay === "piedra" && myPlay === "tijeras") {
@@ -134,5 +166,4 @@ export const state = {
             return "ganaste"
         }
     },
-    //mandarle al back quien juega(player 1 o 2). No funciona
 }

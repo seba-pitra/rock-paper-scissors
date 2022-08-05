@@ -19,14 +19,31 @@ import { state } from "./state";
     
     //Pruebas del state
     
-    state.setName("Seba", 1)
-    state.signIn(1)// => "/signup"
-    state.signIn(2)
+     state.setName("Seba", 1)
+     state.signIn(1)// => "/signup"
+     state.signIn(2)
+
     const cs = state.getState();
     // console.log(cs.roomId, "ESTE ES EL ROOM ID");
+
+    state.accessToRoom()
+    state.setStatus({
+        player: 2,
+        online: true,
+        start: true
+    })
+    state.setPlay({
+        player: 1,
+        choise: "piedra"
+    })
+    state.setPlay({
+        player: 1,
+        choise: "piedra"
+    })
+
+    
     
 
-    // state.accessToRoom()
     
     
 })()

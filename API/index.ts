@@ -25,7 +25,6 @@ app.post('/signup', async (req, res) => {
             usersCollection.add({ 
                 nombre,
             }).then((newUserRef) => {
-                const user = newUserRef.id                
                 res.json({
                     id: newUserRef.id,
                     new:true
@@ -113,11 +112,11 @@ app.post('/new-player', (req,res) => {
 
 //agregar los status (online y start) a los players
 app.post("/status", (req,res) => {
-    const {roomId} = req.body
+    const roomId = /*parseInt(req.body.roomId)*/ req.body.roomId
     const {player} = req.body
     const {online} = req.body
     const {start} = req.body
-
+    
     roomsCollection
         .doc(roomId)
         .get()
