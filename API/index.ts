@@ -114,7 +114,6 @@ app.post('/new-player', (req,res) => {
 //agregar los status (online y start) a los players
 app.post("/status", (req,res) => {
     const {roomId} = req.body
-    const {name} = req.body
     const {player} = req.body
     const {online} = req.body
     const {start} = req.body

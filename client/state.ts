@@ -24,27 +24,15 @@ export const state = {
         }
     },
     listeners:[],
-    // init() {
-    //     const lastStorageState = localStorage.getItem("state")
-    // },
-    // listenRoom() {
-    //     const cs = this.getState();
-    //     const chatRoomRef = rtdb.ref("/rooms/" + cs.rtdbRoomId)
-
-    //     chatRoomRef.on("value", snapshot => {
-    //         const value = snapshot.val()
-    //         cs.rtdbData = value
-    //         this.setState(cs)
-    //         console.log(cs.rtdbData);
-            
-    //     })
-    // },
+    //funciona
     getState() {
         return this.data;
     },
+    //Funciona
     suscribe(cb: (any) => any) {
         this.listeners.push(cb);
     },
+    //Funciona
     setState(newState) {
         this.data = newState;
         for (const cb of this.listeners) {
@@ -53,6 +41,7 @@ export const state = {
         console.log("soy el state,cambié",this.getState());
         
     },
+    //Funciona
     setName(name:string, player:number) {
         const cs = this.getState();
         if (player == 1) {
@@ -64,6 +53,7 @@ export const state = {
         this.setState(cs)
     },
     //Registra los jugadores en firestore(users)
+    //Funciona
     signIn(player:number) {
         const cs = this.getState();
         if (player == 1) {
@@ -94,11 +84,11 @@ export const state = {
         }
         
     },
-    //Crea room
+    //Crea room. Se ejecuta en "this.signin()"
+    //Funciona
     askNewRoom() {
         const cs = this.getState();
         if (cs.playerOneId) {
-            console.log("entra al if");
             fetch(API_BASE_URL + "/rooms",{
                 method: "post",
                 headers: { 'content-type': "application/json" },
@@ -108,29 +98,28 @@ export const state = {
             .then(data => {
                 cs.roomId = data.id;
                 this.setState(cs)
-                
             })
-            // const res = await fetch(API_BASE_URL + "/rooms",{
-            //     method: "post",
-            //     headers: { 'content-type': "application/json" },
-            //     body: JSON.stringify({ userId: cs.playerOneId })
-            // })
-            // const { id } = await res.json()
-            // cs.roomId = id;
-            // console.log("lo logre? lo logró señor");
         }
     },
-    //Una vez que existe la room su ID, el 2do jugador podra acceder a ella
+    //Una vez que existe la room(firestore) con su ID, el 2do jugador podra acceder a ella
+    //Funciona. Creo que tanto el endpoint como esta funcion necesitan un nombre.
+    //Hasta ahora no subi a la BD ningun nombre
     accessToRoom() {
         const cs = this.getState();
+        
         fetch(API_BASE_URL + "/new-player", {
             method: "post",
             headers: { 'content-type': "application/json" },
             body: JSON.stringify({
-                roomId: cs.roomId,
+                roomId: "cs.roomId",
             })
         })
         .then(res => res.json())
+    },
+    //¿El otro jugador esta en la sala de instruciones? entonces esta "online:true"
+    //¿El 2do jugador apretó jugar? Entonces está "start:true"
+    setStatus() {
+
     },
     whoWins(myPlay:Jugada, computerPlay:Jugada) {
         if (computerPlay === "piedra" && myPlay === "tijeras") {
@@ -145,8 +134,5 @@ export const state = {
             return "ganaste"
         }
     },
-    //mandarle al back quien juega(player 1 o 2)=> "setPlay"
-    setPlay(player:number) {
-
-    }
+    //mandarle al back quien juega(player 1 o 2). No funciona
 }

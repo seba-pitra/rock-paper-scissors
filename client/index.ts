@@ -18,14 +18,15 @@ import { state } from "./state";
     initCounterComp();
     
     //Pruebas del state
-    const cs = state.getState();
-
+    
     state.setName("Seba", 1)
-    state.setName("fede", 2)
     state.signIn(1)// => "/signup"
     state.signIn(2)
+    const cs = state.getState();
+    // console.log(cs.roomId, "ESTE ES EL ROOM ID");
+    
 
-    state.accessToRoom()
+    // state.accessToRoom()
     
     
 })()
