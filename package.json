@@ -9,6 +9,7 @@
     "express": "^4.18.1",
     "firebase": "8.7.1",
     "firebase-admin": "^11.0.1",
+    "lodash": "^4.17.21",
     "nodemon": "^2.0.19",
     "parcel": "^2.6.2",
     "uuid": "^8.3.2"
@@ -20,5 +21,8 @@
     "build:api": "tsc ./server/index.ts",
     "build": "yarn build:front && yarn build:api",
     "start": "node index.js"
+  },
+  "devDependencies": {
+    "process": "^0.11.10"
   }
 }

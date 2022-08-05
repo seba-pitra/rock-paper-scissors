@@ -93,29 +93,22 @@ app.get('/rtdbRoomId', (req, res) => {
 // agrega segundo jugador a rtdbRoom
 app.post('/new-player', (req,res) => {
     const {roomId} = req.body;
-    const {userId} = req.body
-    usersCollection
-        .doc(userId)
-        .get()
-        .then(doc => {
-            roomsCollection
-               .doc(roomId)
-               .get()
-               .then(doc => {
-                const user = userId
-                   const rtdbRoom = doc.data()
-                   const rtdbRoomId = rtdbRoom.rtdbRoom
-                   const roomRef = rtdb.ref("/rooms/" + rtdbRoomId)
-                   roomRef.update({
-                    playerTwo: user
-                })
-                .then(() => {
-                    res.json({
-                        message:"ok"
-                })
+    roomsCollection
+    .doc(roomId)
+    .get()
+    .then(doc => {
+        const rtdbRoom = doc.data()
+        const rtdbRoomId = rtdbRoom.rtdbRoom
+        const roomRef = rtdb.ref("/rooms/" + rtdbRoomId)
+        roomRef.update({
+        playerTwo: "new Player"
+        })
+        .then(() => {
+            res.json({
+                message:"ok"
             })
-        })     
-    })
+        })
+    })     
 })
 
 //agregar los status (online y start) a los players

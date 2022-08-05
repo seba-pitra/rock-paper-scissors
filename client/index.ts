@@ -16,14 +16,16 @@ import { state } from "./state";
     initBotonComp();
     initTextComp();
     initCounterComp();
-
+    
     //Pruebas del state
+    const cs = state.getState();
+
     state.setName("Seba", 1)
     state.setName("fede", 2)
-    // state.signIn(1)
-    state.askNewRoom()
+    state.signIn(1)// => "/signup"
+    state.signIn(2)
+
+    state.accessToRoom()
     
     
-    const cs = state.getState();
-    console.log(cs);
 })()
