@@ -47,6 +47,20 @@ export const state = {
         this.listeners.push(cb);
     },
     //Funciona
+    whoWins(myPlay:Jugada, computerPlay:Jugada) {
+        if (computerPlay === "piedra" && myPlay === "tijeras") {
+            return "perdiste"
+        }else if(computerPlay === "papel" && myPlay === "piedra") {
+            return "perdiste"
+        }else if(computerPlay === "tijeras" && myPlay === "papel") {
+            return "perdiste"
+        }else if(myPlay === computerPlay) {
+            return "empate"
+        } else {
+            return "ganaste"
+        }
+    },
+    //Funciona
     setName(name:string, player:number) {
         const cs = this.getState();
         if (player == 1) {
@@ -152,18 +166,5 @@ export const state = {
                 choise: params.choise
             })
         })
-    },
-    whoWins(myPlay:Jugada, computerPlay:Jugada) {
-        if (computerPlay === "piedra" && myPlay === "tijeras") {
-            return "perdiste"
-        }else if(computerPlay === "papel" && myPlay === "piedra") {
-            return "perdiste"
-        }else if(computerPlay === "tijeras" && myPlay === "papel") {
-            return "perdiste"
-        }else if(myPlay === computerPlay) {
-            return "empate"
-        } else {
-            return "ganaste"
-        }
     },
 }
