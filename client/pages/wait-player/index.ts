@@ -2,7 +2,6 @@ import { state } from "../../state";
 
 export function initWaitPlayer(params) {
    const cs = state.getState();
-   console.log("estoy en el wait player!",cs);
    
    const div = document.createElement("div");
    div.className = "wait-player__container"
@@ -20,7 +19,11 @@ export function initWaitPlayer(params) {
          <custom-papel></custom-papel>
       </div>
    `
+   
+   state.setStatus({ player: 1, online:true, start:false })
+   .then(()=> state.listenRoom())
    state.getRtdbRoomId()
+         
 
    return div;
 }

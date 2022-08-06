@@ -34,15 +34,14 @@ export const state = {
         const roomRef = rtdb.ref("/rooms/" + cs.rtdbRoomId)
         roomRef.on("value", snapshot => {
             const value = snapshot.val()
-            console.log(value,);
-            
-            // cs.rtdbData = value
-            // this.setState(cs)
+            cs.rtdbData = value
+            this.setState(cs)
+            console.log("escucho los cambios de la rtdb");
         })
     },
     getRtdbRoomId() {
         const cs = this.getState()
-        fetch(API_BASE_URL + "/rtdbRoomId", {
+        return fetch(API_BASE_URL + "/rtdbRoomId", {
             method: "post",
             headers: { 'content-type': "application/json" },
             body: JSON.stringify({ roomId: cs.roomId })
@@ -52,8 +51,6 @@ export const state = {
             const {rtdbRoom} = data;
             cs.rtdbRoomId = rtdbRoom;
             this.setState(cs)
-            console.log(cs, "get rtdbroom");
-            
         })
     },
     //Funciona
@@ -144,11 +141,11 @@ export const state = {
     setStatus(params:{ player:number, online:boolean, start:boolean }) {
         const cs = this.getState();
         
-        fetch(API_BASE_URL + "/status", {
+        return fetch(API_BASE_URL + "/status", {
             method: "post",
             headers: { 'content-type': "application/json" },
             body: JSON.stringify({
-                roomId: "11301",
+                roomId: cs.roomId,
                 player: params.player,
                 online: params.online,
                 start: params.start

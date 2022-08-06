@@ -30,8 +30,9 @@ export function initGetName(params) {
       state.signIn()
       .then(async()=> {
          await state.askNewRoom(cs.playerOneId)
-         .then( () => params.goTo("./wait-player") )
-         
+                  .then( () => {
+                     params.goTo("./wait-player")
+                  })
       })
       // state.askNewRoom(cs.playerOneId)
       
