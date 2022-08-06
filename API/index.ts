@@ -147,6 +147,7 @@ app.post("/play", (req,res) => {
     const {roomId} = req.body
     const {player} = req.body
     const {choise} = req.body
+    const {name} = req.body
 
     roomsCollection
         .doc(roomId)
@@ -157,7 +158,8 @@ app.post("/play", (req,res) => {
                 const rtdbRoomId = rtdbRoom.rtdbRoom
                 const roomRef = rtdb.ref("/rooms/" + rtdbRoomId + "/playerOne");
                 roomRef.update({
-                    choise: choise
+                    choise: choise,
+                    name: name
                 })    
             }
             if (player == 2) {
@@ -165,7 +167,8 @@ app.post("/play", (req,res) => {
                 const rtdbRoomId = rtdbRoom.rtdbRoom
                 const roomRef = rtdb.ref("/rooms/" + rtdbRoomId + "/playerTwo");
                 roomRef.update({
-                    choise: choise
+                    choise: choise,
+                    name: name
                 })    
             }
         }).then(() => res.json({ message: "ok" }))

@@ -1,3 +1,5 @@
+import { state } from "../../state";
+
 export function initGetInSala(params) {
     const div = document.createElement("div");
     div.className = "welcome-container"
@@ -18,7 +20,10 @@ export function initGetInSala(params) {
     const secondButton:any = div.querySelector(".get-in");
     secondButton.addEventListener("click", (e) => {
       e.preventDefault()
+      const cs = state.getState();
       console.log(secondButton.innerHTML);
+
+
       params.goTo("./wait-room")
     })
 

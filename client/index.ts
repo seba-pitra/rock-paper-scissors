@@ -17,29 +17,37 @@ import { state } from "./state";
     initTextComp();
     initCounterComp();
     
-    //Pruebas del state
-    
-     state.setName("Seba", 1)
-     state.signIn(1)// => "/signup"
-     state.signIn(2)
-
+    //PRUEBAS DEL STATE:
     const cs = state.getState();
-    // console.log(cs.roomId, "ESTE ES EL ROOM ID");
 
-    state.accessToRoom()
-    state.setStatus({
-        player: 2,
-        online: true,
-        start: true
-    })
-    state.setPlay({
-        player: 1,
-        choise: "piedra"
-    })
-    state.setPlay({
-        player: 1,
-        choise: "piedra"
-    })
+    //  state.setName("Seba", 1)
+    //  state.signIn(1)// => "/signup"
+    //  state.signIn(2)
+
+    //  state.accessToRoom()
+
+    // state.setStatus({
+    //     player: 1,
+    //     online: true,
+    //     start: true
+    // })
+    // state.setStatus({
+    //     player: 2,
+    //     online: true,
+    //     start: true
+    // })
+    
+    // state.setPlay({
+    //     player: 1,
+    //     choise: "piedra",
+    //     name: "Seba"
+    // })
+    // state.setPlay({
+    //     player: 2,
+    //     choise: "piedra",
+    //     name: "Fede"
+    // })
+    
 
     
     

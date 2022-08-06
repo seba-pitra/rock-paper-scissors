@@ -1,4 +1,9 @@
+import { state } from "../../state";
+
 export function initPageWelcome(params) {
+  const cs = state.getState();
+  
+
     const div = document.createElement("div");
     div.className = "welcome-container"
 
@@ -18,15 +23,21 @@ export function initPageWelcome(params) {
     const firstButton:any = div.querySelector(".new-game");
     firstButton.addEventListener("click", (e) => {
       e.preventDefault()
-      console.log(firstButton.innerHTML);
-      params.goTo("./get-name")
+      
+      cs.player = 1
+      state.setState(cs)
+
+      params.goTo("/get-name")
     })
 
     const secondButton:any = div.querySelector(".get-in");
     secondButton.addEventListener("click", (e) => {
       e.preventDefault()
-      console.log(secondButton.innerHTML);
-      params.goTo("./get-in")
+
+      cs.player = 2
+      state.setState(cs)
+
+      params.goTo("/get-in")
     })
 
     

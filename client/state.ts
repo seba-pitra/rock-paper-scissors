@@ -8,13 +8,12 @@ const API_BASE_URL = "http://localhost:3000";
 
 export const state = {
     data:{
-        playerOneName: "",
-        playerTwoName: "",
+        playerName: "",
         playerOneId: "",
-        playerTwoId: "",
         rtdbData: {},
         rtdbRoomId: "",
         roomId: "",
+        player: "",
         currentGame: {
             computerPlay:"",
             myPlay:""
@@ -29,7 +28,7 @@ export const state = {
         const lastStorage = localStorage.getItem("state")
         return lastStorage;
     },
-    //funciona
+    //Funciona
     getState() {
         return this.data;
     },
@@ -60,57 +59,39 @@ export const state = {
             return "ganaste"
         }
     },
+    //Setea los names en la data
     //Funciona
-    setName(name:string, player:number) {
+    setName(name:string) {
         const cs = this.getState();
-        if (player == 1) {
-            cs.playerOneName = name
-        }
-        if (player == 2) {
-            cs.playerTwoName = name
-        }
+        cs.playerName = name
         this.setState(cs)
     },
     //Registra los jugadores en firestore(users)
     //Funciona
-    signIn(player:number) {
+    signIn() {
         const cs = this.getState();
-        if (player == 1) {
-            fetch(API_BASE_URL + "/signup", {
-                method: "post",
-                headers: { 'content-type': "application/json" },
-                body: JSON.stringify({ nombre: cs.playerOneName })
-            })
-            .then(res => res.json())
-            .then(data => {
-                cs.playerOneId = data.id;
-                this.setState(cs)
-                this.askNewRoom()
-            })
-        }
-        if (player == 2) {
-            fetch(API_BASE_URL + "/signup", {
-                method: "post",
-                headers: { 'content-type': "application/json" },
-                body: JSON.stringify({ nombre: cs.playerTwoName })
-            })
-            .then(res => res.json())
-            .then((data) => {
-                const cs = this.getState()
-                cs.playerTwoId = data.id 
-                this.setState(cs)
-            })
-        }
+        return fetch(API_BASE_URL + "/signup", {
+            method: "post",
+            headers: { 'content-type': "application/json" },
+            body: JSON.stringify({ nombre: cs.playerName })
+        })
+        .then(res => res.json())
+        .then(data => {
+            const {id} = data
+            cs.playerOneId = id;
+            this.setState(cs)
+            return id
+        })
     },
-    //Crea room. Se ejecuta en "this.signin()" en "player == 1"
+    //Crea room.
     //Funciona
-    askNewRoom() {
+    askNewRoom(playerId:string) {
         const cs = this.getState();
-        if (cs.playerOneId) {
+        if (playerId) {
             fetch(API_BASE_URL + "/rooms",{
                 method: "post",
                 headers: { 'content-type': "application/json" },
-                body: JSON.stringify({ userId: cs.playerOneId })
+                body: JSON.stringify({ userId: playerId })
             })
             .then(res => res.json())
             .then(data => {
@@ -119,21 +100,15 @@ export const state = {
             })
         }
     },
-
-
-
-    //Las siguientes no funcionan si les paso el roomId que esta en la data del state. El "roomId" llega vacio O.o
-
-
     //Una vez que existe la room(firestore) con su ID, el 2do jugador podra acceder a ella
     accessToRoom() {
         const cs = this.getState();
-        
-        fetch(API_BASE_URL + "/new-player", {
+        // cs.roomId = "11301"
+        return fetch(API_BASE_URL + "/new-player", {
             method: "post",
             headers: { 'content-type': "application/json" },
             body: JSON.stringify({
-                roomId: "13412",
+                roomId: cs.roomId,
             })
         })
         .then(res => res.json())
@@ -147,7 +122,7 @@ export const state = {
             method: "post",
             headers: { 'content-type': "application/json" },
             body: JSON.stringify({
-                roomId: "12658",
+                roomId: "11301",
                 player: params.player,
                 online: params.online,
                 start: params.start
@@ -155,15 +130,16 @@ export const state = {
         })
     },
     //mandarle al back quien juega(player 1 o 2) y qué eligió.
-    setPlay(params: { player:number, choise:string }) {
+    setPlay(params: { player:number, choise:string,name:string }) {
         const cs = this.getState();
         fetch(API_BASE_URL + "/play", {
             method: "post",
             headers: { 'content-type': "application/json" },
             body: JSON.stringify({
-                roomId: "12658",
+                roomId: "11301",
                 player: params.player,
-                choise: params.choise
+                choise: params.choise,
+                name: params.name
             })
         })
     },
