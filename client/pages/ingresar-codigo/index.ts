@@ -20,14 +20,17 @@ export function initGetInSala(params) {
     const secondButton:any = div.querySelector(".get-in");
     secondButton.addEventListener("click", (e) => {
       e.preventDefault()
-      const cs = state.getState();
-      console.log(secondButton.innerHTML);
-
-
-      params.goTo("./wait-room")
+      const codigo = div.querySelector("input").value
+      if(codigo) {
+        const cs = state.getState();
+        cs.roomId = codigo
+  
+        state.setState(cs)
+        state.accessToRoom(codigo)
+  
+        params.goTo("./instruction")
+      }
     })
-
-    
     sessionStorage.setItem("me", "0")
     sessionStorage.setItem("machine", "0")
 

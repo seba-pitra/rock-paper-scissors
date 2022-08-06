@@ -28,6 +28,34 @@ export const state = {
         const lastStorage = localStorage.getItem("state")
         return lastStorage;
     },
+    //Necesito el rtdbRoomId para "listenRoom()"
+    listenRoom() {
+        const cs = this.getState();
+        const roomRef = rtdb.ref("/rooms/" + cs.rtdbRoomId)
+        roomRef.on("value", snapshot => {
+            const value = snapshot.val()
+            console.log(value,);
+            
+            // cs.rtdbData = value
+            // this.setState(cs)
+        })
+    },
+    getRtdbRoomId() {
+        const cs = this.getState()
+        fetch(API_BASE_URL + "/rtdbRoomId", {
+            method: "post",
+            headers: { 'content-type': "application/json" },
+            body: JSON.stringify({ roomId: cs.roomId })
+        })
+        .then(res => res.json())
+        .then(data => {
+            const {rtdbRoom} = data;
+            cs.rtdbRoomId = rtdbRoom;
+            this.setState(cs)
+            console.log(cs, "get rtdbroom");
+            
+        })
+    },
     //Funciona
     getState() {
         return this.data;
@@ -88,7 +116,7 @@ export const state = {
     askNewRoom(playerId:string) {
         const cs = this.getState();
         if (playerId) {
-            fetch(API_BASE_URL + "/rooms",{
+            return fetch(API_BASE_URL + "/rooms",{
                 method: "post",
                 headers: { 'content-type': "application/json" },
                 body: JSON.stringify({ userId: playerId })
@@ -101,14 +129,12 @@ export const state = {
         }
     },
     //Una vez que existe la room(firestore) con su ID, el 2do jugador podra acceder a ella
-    accessToRoom() {
-        const cs = this.getState();
-        // cs.roomId = "11301"
+    accessToRoom(roomId) {
         return fetch(API_BASE_URL + "/new-player", {
             method: "post",
             headers: { 'content-type': "application/json" },
             body: JSON.stringify({
-                roomId: cs.roomId,
+                roomId: roomId,
             })
         })
         .then(res => res.json())

@@ -27,15 +27,15 @@ export function initGetName(params) {
       const nombre = div.querySelector("input").value
       state.setName(nombre)
       
-      
-      state.signIn().then( ()=> {
-         state.askNewRoom(cs.playerOneId) 
-         console.log(cs, "despues de asknewRoom");
+      state.signIn()
+      .then(async()=> {
+         await state.askNewRoom(cs.playerOneId)
+         .then( () => params.goTo("./wait-player") )
+         
       })
       // state.askNewRoom(cs.playerOneId)
       
       
-      // params.goTo("./wait-player")
     })
 
     return div;

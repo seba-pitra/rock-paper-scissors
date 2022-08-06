@@ -5,21 +5,22 @@ export function initWaitPlayer(params) {
    console.log("estoy en el wait player!",cs);
    
    const div = document.createElement("div");
-   div.className = "welcome-container"
+   div.className = "wait-player__container"
 
    div.innerHTML = `
       <custom-text class="text-container">
         Comparte el código con tu contricante:
-        <custom-text variant="title">
-           77HH88
         </custom-text>
-      </custom-text>
+        <custom-text>
+           ${cs.roomId}
+        </custom-text>
       <div class="welcome-hands-container">
          <custom-tijera></custom-tijera>
          <custom-piedra></custom-piedra>
          <custom-papel></custom-papel>
       </div>
    `
+   state.getRtdbRoomId()
 
    return div;
 }

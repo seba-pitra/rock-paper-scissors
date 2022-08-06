@@ -73,7 +73,7 @@ app.post('/rooms', (req, res) => {
 });
 
 //consigue el id de rtdbroom
-app.get('/rtdbRoomId', (req, res) => {
+app.post('/rtdbRoomId', (req, res) => {
     const {roomId} = req.body
     roomsCollection
         .doc(roomId)

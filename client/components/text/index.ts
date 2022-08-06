@@ -26,7 +26,6 @@ export function initTextComp() {
             @media(min-width:769px) {
                 .title {
                     margin-top: 145px;
-                    font-size: 82px;
                 }
             }            
             .body {
