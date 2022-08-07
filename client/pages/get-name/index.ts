@@ -30,11 +30,15 @@ export function initGetName(params) {
       state.signIn()
       .then(async()=> {
          await state.askNewRoom(cs.playerOneId)
-                  .then( () => {
+         .then(async () => {
+            await state.getRtdbRoomId()
+                  .then(async() => {
+                     state.listenRoom()
+                     await state.setStatus({ player: 1, online:true, start:false }) 
                      params.goTo("./wait-player")
                   })
+               })
       })
-      // state.askNewRoom(cs.playerOneId)
       
       
     })

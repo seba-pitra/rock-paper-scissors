@@ -32,11 +32,11 @@ export const state = {
     listenRoom() {
         const cs = this.getState();
         const roomRef = rtdb.ref("/rooms/" + cs.rtdbRoomId)
-        roomRef.on("value", snapshot => {
+        return roomRef.on("value", snapshot => {
             const value = snapshot.val()
             cs.rtdbData = value
             this.setState(cs)
-            console.log("escucho los cambios de la rtdb");
+            console.log("cambió la rtdb: ", value);
         })
     },
     getRtdbRoomId() {
@@ -51,6 +51,8 @@ export const state = {
             const {rtdbRoom} = data;
             cs.rtdbRoomId = rtdbRoom;
             this.setState(cs)
+            console.log("paso por getRtdbRoomId()");
+            
         })
     },
     //Funciona
