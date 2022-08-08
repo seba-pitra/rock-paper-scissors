@@ -17,7 +17,7 @@ export function initWaitRoom(params) {
 
     state.listenRoom()
 
-    state.setStatus()
+   //  state.setStatus()
     return div;
 }
 

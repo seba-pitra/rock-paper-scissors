@@ -19,29 +19,42 @@ export function initGetName(params) {
          </div>
          `
          
-   const firstButton:any = div.querySelector(".new-game");
-      
+         
+         const cs = state.getState();
+         
+         const firstButton:any = div.querySelector(".new-game");
    firstButton.addEventListener("click", async (e) => {
-      e.preventDefault()
-
       const nombre = div.querySelector("input").value
-      const cs = state.getState();
+      e.preventDefault()
       
-      state.setName(1,nombre)
+      state.setName(cs.player,nombre)
+      state.listenRoom()
+      
+      if(nombre === "") return alert("Necesito saber tu nombre :D")
 
-
-      state.signIn()
-      .then(async()=> {
-         await state.askNewRoom(cs.playerOneId)
-         await state.getRtdbRoomId()
-         .then(async () => {
-            await state.setStatus({ player: 1, online:true, start:false })
+      if(cs.player === 1) {
+         state.signIn()
+         .then(() => {
+            return state.askNewRoom(cs.playerOneId)
+         })
+         .then(() => {
+            return state.getRtdbRoomId()
+         })
+         .then(() => {
+            state.setStatus({ player: 1, online:true, start:false, name:nombre })
             state.listenRoom()
-            setTimeout(async ()=> {
-               params.goTo("./wait-player")
+            return setTimeout(async ()=> {
+               params.goTo("/wait-player")
             }, 800)
          })
-      })
+      } else {
+         state.getRtdbRoomId()
+         state.setStatus({ player:2, online: true, start:false, name:nombre})
+         .then(() => {
+            state.listenRoom()
+            params.goTo("/instructions")
+         })
+      }
    })
-    return div;
+   return div;
 }

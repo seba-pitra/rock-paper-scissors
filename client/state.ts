@@ -37,7 +37,6 @@ export const state = {
             const value = snapshot.val()
             cs.rtdbData = value
             this.setState(cs)
-            console.log("cambió la rtdb: ", value);
         })
     },
     getRtdbRoomId() {
@@ -103,6 +102,7 @@ export const state = {
     //Funciona
     signIn() {
         const cs = this.getState();
+
         return fetch(API_BASE_URL + "/signup", {
             method: "post",
             headers: { 'content-type': "application/json" },
@@ -146,7 +146,7 @@ export const state = {
     },
     //¿El otro jugador esta en la sala de instruciones? entonces esta "online:true"
     //¿El 2do jugador apretó jugar? Entonces está "start:true"
-    setStatus(params:{ player:number, online:boolean, start:boolean }) {
+    setStatus(params:{ player:number, online:boolean, start:boolean, name?:string }) {
         const cs = this.getState();
         
         return fetch(API_BASE_URL + "/status", {
@@ -156,7 +156,8 @@ export const state = {
                 roomId: cs.roomId,
                 player: params.player,
                 online: params.online,
-                start: params.start
+                start: params.start,
+                name: params.name
             })
         })
     },

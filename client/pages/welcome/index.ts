@@ -39,7 +39,6 @@ export function initPageWelcome(params) {
 
       params.goTo("/get-in")
     })
-
     
     sessionStorage.setItem("me", "0")
     sessionStorage.setItem("machine", "0")

@@ -18,23 +18,26 @@ export function initGetInSala(params) {
     `
 
     const secondButton:any = div.querySelector(".get-in");
+    
+    
+    state.listenRoom()
     secondButton.addEventListener("click", (e) => {
       e.preventDefault()
       const codigo = div.querySelector("input").value
       if(codigo) {
         const cs = state.getState();
         cs.roomId = codigo
-  
+        
         state.setState(cs)
         state.accessToRoom(codigo)
         .then(async () => {
-          await state.setStatus({ player:2, online: true, start:true })
-          .then(() => params.goTo("./instruction"))
+          params.goTo("/get-name")
         })
       }
     })
     sessionStorage.setItem("me", "0")
     sessionStorage.setItem("machine", "0")
+
 
     return div;
 }

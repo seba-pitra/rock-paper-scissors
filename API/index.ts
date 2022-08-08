@@ -116,6 +116,7 @@ app.post("/status", (req,res) => {
     const {player} = req.body
     const {online} = req.body
     const {start} = req.body
+    const {name} = req.body
     
     roomsCollection
         .doc(roomId)
@@ -127,7 +128,8 @@ app.post("/status", (req,res) => {
                 const roomRef = rtdb.ref("/rooms/" + rtdbRoomId + "/playerOne");
                 roomRef.update({
                     online: Boolean(online),
-                    start: Boolean(start)
+                    start: Boolean(start),
+                    name: name
                 })    
             }
             if (player == 2) {
@@ -136,7 +138,8 @@ app.post("/status", (req,res) => {
                 const roomRef = rtdb.ref("/rooms/" + rtdbRoomId + "/playerTwo");
                 roomRef.update({
                     online: Boolean(online),
-                    start: Boolean(start)
+                    start: Boolean(start),
+                    name: name
                 })    
             }
         }).then(() => res.json({ message: "ok" }))
