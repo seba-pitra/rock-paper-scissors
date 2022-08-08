@@ -1,3 +1,5 @@
+import { state } from "../../state";
+
 export function initInstrucionsPage(params) {
     const div = document.createElement("div");
     div.className = "instructions-container"
@@ -15,9 +17,9 @@ export function initInstrucionsPage(params) {
     `
 
     const button:any = div.querySelector("custom-boton");
-    button.addEventListener("click", (e) => {
+    button.addEventListener("click",async (e) => {
       e.preventDefault()
-      params.goTo("/play")
+      params.goTo("/wait-room")
     })
     
     return div;

@@ -30,8 +30,6 @@ export function initWaitPlayer(params) {
          clearInterval(interval)
       }   
    }, 1000)
-
    
    return div;
-
 }
