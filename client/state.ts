@@ -66,7 +66,7 @@ export const state = {
             cb();  
         }        
         localStorage.setItem("state", JSON.stringify(newState))
-        console.log("soy el state,cambié",this.getState());
+        // console.log("soy el state,cambié",this.getState());
     },
     //Funciona
     suscribe(cb: (any) => any) {
@@ -146,8 +146,10 @@ export const state = {
     },
     //¿El otro jugador esta en la sala de instruciones? entonces esta "online:true"
     //¿El 2do jugador apretó jugar? Entonces está "start:true"
-    setStatus(params:{ player:number, online:boolean, start:boolean, name?:string }) {
+    setStatus(params:{ player:number, online?:boolean, start:boolean, name?:string }) {
         const cs = this.getState();
+        console.log("params", params);
+        console.log("nombrreee", cs.playerName);
         
         return fetch(API_BASE_URL + "/status", {
             method: "post",

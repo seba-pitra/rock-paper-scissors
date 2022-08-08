@@ -17,9 +17,20 @@ export function initInstrucionsPage(params) {
     `
 
     const button:any = div.querySelector("custom-boton");
+    const cs = state.getState();
+
     button.addEventListener("click",async (e) => {
       e.preventDefault()
-      params.goTo("/wait-room")
+
+      if (cs.player === 1) {
+        state.setStatus({player:1, online:true, start:true, name:cs.playerName})
+        .then( ()=> params.goTo("/wait-room"))
+      } else if(cs.player === 2) {
+        state.setStatus({player:2, online:true, start:true, name:cs.playerTwoName})
+        .then( ()=> params.goTo("/wait-room"))
+      }
+
+      // params.goTo("/wait-room")
     })
     
     return div;
