@@ -1,6 +1,7 @@
 import { state } from "../../state";
 
 export function initWaitRoom(params) {
+    const cs = state.getState()
     const div = document.createElement("div");
     div.className = "welcome-container"
 
@@ -15,10 +16,17 @@ export function initWaitRoom(params) {
       </div>
     `
 
-    state.listenRoom()
+    let interval = setInterval(()=>{
+       const playerOneStart = cs.rtdbData.playerOne.start;
+       const playerTwoStart = cs.rtdbData.playerTwo.start; 
 
-   //  state.setStatus()
+       if (playerOneStart && playerTwoStart) {
+         params.goTo("/play")
+         clearInterval(interval)
+       } 
+    }, 1000)
+    
+
+
     return div;
 }
-
-//PONER LOS NOMBRES DE LOS JUGADORES DONDE TIENEN QUE IR. HACER ESO ANTES DE ADELANTAR OTRAS COSAS :)
