@@ -27,8 +27,10 @@ export function initGetInSala(params) {
   
         state.setState(cs)
         state.accessToRoom(codigo)
-  
-        params.goTo("./instruction")
+        .then(async () => {
+          await state.setStatus({ player:2, online: true, start:true })
+          .then(() => params.goTo("./instruction"))
+        })
       }
     })
     sessionStorage.setItem("me", "0")

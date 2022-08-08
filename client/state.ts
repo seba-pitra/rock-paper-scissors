@@ -10,6 +10,7 @@ export const state = {
     data:{
         playerName: "",
         playerOneId: "",
+        playerTwoName : "",
         rtdbData: {},
         rtdbRoomId: "",
         roomId: "",
@@ -88,10 +89,15 @@ export const state = {
     },
     //Setea los names en la data
     //Funciona
-    setName(name:string) {
+    setName(player:number, name:string) {
         const cs = this.getState();
-        cs.playerName = name
-        this.setState(cs)
+        if (player == 1) {
+            cs.playerName = name;
+            return this.setState(cs);
+        } else if(player == 2) {
+            cs.playerTwoName = name;
+            return this.setState(cs);
+        }
     },
     //Registra los jugadores en firestore(users)
     //Funciona

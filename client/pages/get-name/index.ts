@@ -22,26 +22,26 @@ export function initGetName(params) {
    const firstButton:any = div.querySelector(".new-game");
       
    firstButton.addEventListener("click", async (e) => {
-      const cs = state.getState();
       e.preventDefault()
+
       const nombre = div.querySelector("input").value
-      state.setName(nombre)
+      const cs = state.getState();
       
+      state.setName(1,nombre)
+
+
       state.signIn()
       .then(async()=> {
          await state.askNewRoom(cs.playerOneId)
+         await state.getRtdbRoomId()
          .then(async () => {
-            await state.getRtdbRoomId()
-                  .then(async() => {
-                     state.listenRoom()
-                     await state.setStatus({ player: 1, online:true, start:false }) 
-                     params.goTo("./wait-player")
-                  })
-               })
+            await state.setStatus({ player: 1, online:true, start:false })
+            state.listenRoom()
+            setTimeout(async ()=> {
+               params.goTo("./wait-player")
+            }, 800)
+         })
       })
-      
-      
-    })
-
+   })
     return div;
 }
