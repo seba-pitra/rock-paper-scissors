@@ -25,7 +25,6 @@ export const state = {
         const lastStorage = localStorage.getItem("state")
         return lastStorage;
     },
-    //Necesito el rtdbRoomId para "listenRoom()"
     listenRoom() {
         const cs = this.getState();
         const roomRef = rtdb.ref("/rooms/" + cs.rtdbRoomId)
@@ -51,11 +50,9 @@ export const state = {
             
         })
     },
-    //Funciona
     getState() {
         return this.data;
     },
-    //Funciona
     setState(newState) {
         this.data = newState;
         for (const cb of this.listeners) {
@@ -64,11 +61,9 @@ export const state = {
         localStorage.setItem("state", JSON.stringify(newState))
         console.log("soy el state,cambié",this.getState());
     },
-    //Funciona
     suscribe(cb: (any) => any) {
         this.listeners.push(cb);
     },
-    //Funciona
     whoWins(myPlay:Jugada, playerTwoPlay:Jugada) {
         if (playerTwoPlay === "piedra" && myPlay === "tijeras") {
             return "perdiste"
@@ -82,8 +77,6 @@ export const state = {
             return "ganaste"
         }
     },
-    //Setea los names en la data
-    //Funciona
     setName(player:number, name:string) {
         const cs = this.getState();
         if (player == 1) {
@@ -94,8 +87,6 @@ export const state = {
             return this.setState(cs);
         }
     },
-    //Registra los jugadores en firestore(users)
-    //Funciona
     signIn() {
         const cs = this.getState();
 
@@ -112,8 +103,6 @@ export const state = {
             return id
         })
     },
-    //Crea room.
-    //Funciona
     askNewRoom(playerId:string) {
         const cs = this.getState();
         if (playerId) {
@@ -129,7 +118,6 @@ export const state = {
             })
         }
     },
-    //Una vez que existe la room(firestore) con su ID, el 2do jugador podra acceder a ella
     accessToRoom(roomId) {
         return fetch(API_BASE_URL + "/new-player", {
             method: "post",
@@ -140,8 +128,6 @@ export const state = {
         })
         .then(res => res.json())
     },
-    //¿El otro jugador esta en la sala de instruciones? entonces esta "online:true"
-    //¿El 2do jugador apretó jugar? Entonces está "start:true"
     setStatus(params:{ player:number, online?:boolean, start:boolean, name?:string }) {
         const cs = this.getState();
         
@@ -157,7 +143,6 @@ export const state = {
             })
         })
     },
-    //mandarle al back quien juega(player 1 o 2) y qué eligió.
     setPlay(params: { player:number, choise:string }) {
         const cs = this.getState();
         return fetch(API_BASE_URL + "/play", {

@@ -24,8 +24,9 @@ export function initGetName(params) {
          
          const firstButton:any = div.querySelector(".new-game");
    firstButton.addEventListener("click", async (e) => {
-      const nombre = div.querySelector("input").value
       e.preventDefault()
+      
+      const nombre = div.querySelector("input").value
       
       state.setName(cs.player,nombre)
       state.listenRoom()
