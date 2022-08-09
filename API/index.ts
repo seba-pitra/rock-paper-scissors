@@ -13,8 +13,6 @@ app.use(cors())
 app.use(express.json()) 
 app.use(express.static("dist"))
 
-//agrega user a firestore
-//cuando agregue un segundo jugador va a pasar por este endpoint primero para obtener el userId para interactuar en "/new-player"
 app.post('/signup', async (req, res) => {
     const {nombre} = req.body
     usersCollection.where("nombre", "==", nombre)
@@ -37,7 +35,6 @@ app.post('/signup', async (req, res) => {
     })
 });
 
-//agrega una room rt a firestore
 app.post('/rooms', (req, res) => {
     const {userId} = req.body
     usersCollection
@@ -71,7 +68,6 @@ app.post('/rooms', (req, res) => {
     });
 });
 
-//consigue el id de rtdbroom
 app.post('/rtdbRoomId', (req, res) => {
     const {roomId} = req.body
     roomsCollection
@@ -88,7 +84,6 @@ app.post('/rtdbRoomId', (req, res) => {
         })
 });
 
-// agrega segundo jugador a rtdbRoom
 app.post('/new-player', (req,res) => {
     const {roomId} = req.body;
     roomsCollection
@@ -109,7 +104,6 @@ app.post('/new-player', (req,res) => {
     })     
 })
 
-//agregar los status (online y start) a los players
 app.post("/status", (req,res) => {
     const roomId =  req.body.roomId
     const {player} = req.body
@@ -144,7 +138,6 @@ app.post("/status", (req,res) => {
         }).then(() => res.json({ message: "ok" }))
 })
 
-//Agrega lo que eligio el jugador ("piedra, papel o tijera"). La eleccion la recibo en "req.body"
 app.post("/play", (req,res) => {
     const {roomId} = req.body
     const {player} = req.body
