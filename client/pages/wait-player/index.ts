@@ -11,12 +11,11 @@ export function initWaitPlayer(params) {
         <custom-text>
         ${cs.roomId}
         </custom-text>
-      <div class="welcome-hands-container">
-      <custom-tijera></custom-tijera>
-      <custom-piedra></custom-piedra>
-      <custom-papel></custom-papel>
-      </div>
-      `
+   <div class="welcome-hands-container">
+   <custom-tijera></custom-tijera>
+   <custom-piedra></custom-piedra>
+   <custom-papel></custom-papel>
+   `;
    
    state.listenRoom();
    

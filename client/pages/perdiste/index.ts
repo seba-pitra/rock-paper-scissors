@@ -21,16 +21,15 @@ export function initPerdistePage(params) {
     <custom-boton>Volver a jugar</custom-boton>
     `
     
+    if (cs.player === 1) {
+        state.setStatus({ player: 1, online: true, start: false, name: cs.playerName })
+    } else if(cs.player === 2) {
+        state.setStatus({ player: 2, online: true, start: false, name: cs.playerTwoName })
+    }
+
     const button = div.querySelector("custom-boton")
     button?.addEventListener("click", (e) => {
-        if (cs.player === 1) {
-            state.setStatus({ player: 1, online: true, start: false, name: cs.playerName })
-            .then(() => params.goTo("/instruction"))
-        } else if(cs.player === 2) {
-            state.setStatus({ player: 2, online: true, start: false, name: cs.playerTwoName })
-            .then(() => params.goTo("/instruction"))
-        }
+        params.goTo("/instruction")
     })
-
     return div
 }

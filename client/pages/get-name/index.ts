@@ -20,12 +20,12 @@ export function initGetName(params) {
          `
          
          
-         const cs = state.getState();
+   const cs = state.getState();
          
-         const firstButton:any = div.querySelector(".new-game");
+   const firstButton:any = div.querySelector(".new-game");
    firstButton.addEventListener("click", async (e) => {
       e.preventDefault()
-      
+
       const nombre = div.querySelector("input").value
       
       state.setName(cs.player,nombre)
