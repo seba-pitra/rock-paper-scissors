@@ -19,28 +19,27 @@ export function initGetName(params) {
          </div>
          `
          
-         
    const cs = state.getState();
          
    const firstButton:any = div.querySelector(".new-game");
    firstButton.addEventListener("click", async (e) => {
       e.preventDefault()
-
       const nombre = div.querySelector("input").value
-      
       state.setName(cs.player,nombre)
       state.listenRoom()
-      
+
+   
       if(nombre === "") return alert("Necesito saber tu nombre :D")
 
+      
+
+      setTimeout(()=>{
+      }, 2000)
+      
       if(cs.player === 1) {
          state.signIn()
-         .then(() => {
-            return state.askNewRoom(cs.playerOneId)
-         })
-         .then(() => {
-            return state.getRtdbRoomId()
-         })
+         .then(() => state.askNewRoom(cs.playerOneId))
+         .then(() => state.getRtdbRoomId())
          .then(() => {
             state.setStatus({ player: 1, online:true, start:false, name:nombre })
             state.listenRoom()
@@ -56,6 +55,8 @@ export function initGetName(params) {
             params.goTo("/instructions")
          })
       }
+
+
    })
    return div;
 }

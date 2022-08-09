@@ -41,7 +41,5 @@ export function initWaitRoom(params) {
        } 
     }, 1000)
     
-
-
     return div;
 }

@@ -29,10 +29,19 @@ export function initGetInSala(params) {
         cs.roomId = codigo
         
         state.setState(cs)
-        state.accessToRoom(codigo)
-        .then(async () => {
-          params.goTo("/get-name")
-        })
+        state.getRtdbRoomId()
+        .then(() => {
+          state.listenRoom()
+          setTimeout(() => {
+            if (cs.rtdbData.playerOne && cs.rtdbData.playerTwo) {
+              return alert("La sala está completa")
+            } 
+            else {
+              state.accessToRoom(codigo)
+              .then(() => params.goTo("/get-name"))
+            }
+          }, 2000)
+       })
       }
     })
     sessionStorage.setItem("me", "0")
