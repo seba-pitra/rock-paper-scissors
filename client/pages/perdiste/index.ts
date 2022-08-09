@@ -23,7 +23,13 @@ export function initPerdistePage(params) {
     
     const button = div.querySelector("custom-boton")
     button?.addEventListener("click", (e) => {
-        params.goTo("/instruction")
+        if (cs.player === 1) {
+            state.setStatus({ player: 1, online: true, start: false, name: cs.playerName })
+            .then(() => params.goTo("/instruction"))
+        } else if(cs.player === 2) {
+            state.setStatus({ player: 2, online: true, start: false, name: cs.playerTwoName })
+            .then(() => params.goTo("/instruction"))
+        }
     })
 
     return div
