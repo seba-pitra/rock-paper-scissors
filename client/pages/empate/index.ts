@@ -1,20 +1,25 @@
 import { state } from "../../state"
 
 export function initEmpatePage(params) {
-    const currentState = state.getState();
+    const cs = state.getState();
+    const playerOneName = cs.rtdbData.playerOne.name;
+    const playerTwoName = cs.rtdbData.playerTwo.name
+
+    const playerOneValue = cs.history.playerOne;
+    const playerTwoValue = cs.history.playerTwo;
+
     const div = document.createElement("div")
     div.className = "contaner-result"
-    
     div.innerHTML = `
-    <custom-text variant="title">¡Empataste!</custom-text>
+    <custom-text variant="title">¡Empate!</custom-text>
     <div class="score-container">
     <custom-text>Score</custom-text>
-    <custom-text class="results">Vos: ${sessionStorage.getItem("playerOne")}</custom-text>
-    <custom-text class="results">Máquina: ${sessionStorage.getItem("playerTwo")}</custom-text>
+    <custom-text class="results">${playerOneName}: ${playerOneValue}</custom-text>
+    <custom-text class="results">${playerTwoName}: ${playerTwoValue}</custom-text>
     </div>
     <custom-boton>Volver a jugar</custom-boton>
     `
-    
+
     const button = div.querySelector("custom-boton")
     button?.addEventListener("click", (e) => {
         params.goTo("/instruction")

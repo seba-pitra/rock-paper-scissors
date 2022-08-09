@@ -29,49 +29,31 @@ export function initPageJugada(params) {
         ${ comps[playerTwoChoise] }
         `;
     }
-
-
     
-    let playerOneValue = sessionStorage.getItem("playerOne");
-    let playerTwoValue = sessionStorage.getItem("playerTwo");
     const resultOfPlay = state.whoWins(playerOneChoise, playerTwoChoise);
     
     if (resultOfPlay === "ganaste" && cs.player === 1) {
-        // sessionStorage.setItem("playerOne", JSON.stringify(Number(playerOneValue) + 1))
-        cs.history.playerOne =cs.history.playerOne + 1;
+        cs.history.playerOne = cs.history.playerOne + 1;
         state.setState(cs)
-        
-        console.log("history!!",cs.history);
-        
-
         setTimeout(()=> params.goTo(`/ganaste`) , 2000)
 
     } else if(resultOfPlay === "perdiste" && cs.player === 1) {
-        // sessionStorage.setItem("playerTwo", JSON.stringify(Number(playerTwoValue) + 1))
-        cs.history.playerOne =cs.history.playerOne + 1;
+        cs.history.playerTwo =cs.history.playerTwo + 1;
         state.setState(cs)
-        
-        console.log("history!!",cs.history);
-
         setTimeout(() => params.goTo(`/perdiste`) , 2000)
 
     } else if(resultOfPlay === "empate" && cs.player === 1) {
-        cs.history.playerOne =cs.history.playerOne + 1;
-        state.setState(cs)
-        
-        console.log("history!!",cs.history);
-
         setTimeout(() => params.goTo(`/empate`) , 2000)
     }
 
-
     if (resultOfPlay === "ganaste" && cs.player === 2) {
-        sessionStorage.setItem("playerTwo", JSON.stringify(Number(playerTwoValue) + 1))
-
+        cs.history.playerOne = cs.history.playerOne + 1;
+        state.setState(cs)
         setTimeout(() => params.goTo(`/perdiste`) , 2000)
         
     } else if(resultOfPlay === "perdiste" && cs.player === 2) {
-        sessionStorage.setItem("playerOne", JSON.stringify(Number(playerOneValue) + 1))
+        cs.history.playerTwo = cs.history.playerTwo + 1;
+        state.setState(cs)
         setTimeout(() => params.goTo(`/ganaste`) , 2000)
 
     } else if(resultOfPlay === "empate" && cs.player === 2) {

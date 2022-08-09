@@ -2,8 +2,12 @@ import { state} from "../../state"
 const imagen = require("url:../../images/lost.png");
 
 export function initPerdistePage(params) {
-    const currentState = state.getState();
-    currentState.history.computerPlay = currentState.history.computerPlay + 1
+    const cs = state.getState();
+    const playerOneName = cs.rtdbData.playerOne.name;
+    const playerTwoName = cs.rtdbData.playerTwo.name
+
+    const playerOneValue = cs.history.playerOne;
+    const playerTwoValue = cs.history.playerTwo;
 
     const div = document.createElement("div");
     div.className = "contaner-result"
@@ -11,8 +15,8 @@ export function initPerdistePage(params) {
     <img src="${imagen}">
     <div class="score-container">
     <custom-text>Score</custom-text>
-    <custom-text class="results">Vos: ${sessionStorage.getItem("playerOne")}</custom-text>
-    <custom-text class="results">Máquina: ${sessionStorage.getItem("playerTwo")}</custom-text>
+    <custom-text class="results">${playerOneName}: ${playerOneValue}</custom-text>
+    <custom-text class="results">${playerTwoName}: ${playerTwoValue}</custom-text>
     </div>
     <custom-boton>Volver a jugar</custom-boton>
     `
