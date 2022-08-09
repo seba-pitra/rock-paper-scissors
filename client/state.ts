@@ -15,12 +15,12 @@ export const state = {
         rtdbRoomId: "",
         roomId: "",
         player: "",
-        currentGame: {
-            computerPlay:"",
-            myPlay:""
-        },
+        // currentGame: {
+        //     playerTwoPlay:"",
+        //     myPlay:""
+        // },
         history: {
-            computerPlay: 0,
+            playerTwoPlay: 0,
             myPlay: 0
         }
     },
@@ -73,14 +73,14 @@ export const state = {
         this.listeners.push(cb);
     },
     //Funciona
-    whoWins(myPlay:Jugada, computerPlay:Jugada) {
-        if (computerPlay === "piedra" && myPlay === "tijeras") {
+    whoWins(myPlay:Jugada, playerTwoPlay:Jugada) {
+        if (playerTwoPlay === "piedra" && myPlay === "tijeras") {
             return "perdiste"
-        }else if(computerPlay === "papel" && myPlay === "piedra") {
+        }else if(playerTwoPlay === "papel" && myPlay === "piedra") {
             return "perdiste"
-        }else if(computerPlay === "tijeras" && myPlay === "papel") {
+        }else if(playerTwoPlay === "tijeras" && myPlay === "papel") {
             return "perdiste"
-        }else if(myPlay === computerPlay) {
+        }else if(myPlay === playerTwoPlay) {
             return "empate"
         } else {
             return "ganaste"
@@ -162,16 +162,15 @@ export const state = {
         })
     },
     //mandarle al back quien juega(player 1 o 2) y qué eligió.
-    setPlay(params: { player:number, choise:string,name:string }) {
+    setPlay(params: { player:number, choise:string }) {
         const cs = this.getState();
-        fetch(API_BASE_URL + "/play", {
+        return fetch(API_BASE_URL + "/play", {
             method: "post",
             headers: { 'content-type': "application/json" },
             body: JSON.stringify({
-                roomId: "11301",
+                roomId: cs.roomId,
                 player: params.player,
                 choise: params.choise,
-                name: params.name
             })
         })
     },

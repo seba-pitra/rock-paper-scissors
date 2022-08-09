@@ -3,10 +3,10 @@ import { state } from "../../state"
 export function initPageJugada(params) {
     const div = document.createElement("div");
     div.className = "jugada-container"
-
-    const currentState = state.getState();
-    const miJugada = currentState.currentGame.myPlay
-    const maquinaJugada = currentState.currentGame.computerPlay
+    
+    const cs = state.getState();
+    const playerOneChoise = cs.rtdbData.playerOne.choise
+    const playerTwoChoise = cs.rtdbData.playerTwo.choise
 
     const comps = {
         piedra: "<custom-piedra></custom-piedra>",
@@ -14,21 +14,32 @@ export function initPageJugada(params) {
         tijeras: "<custom-tijera></custom-tijera>"
     };
 
-    div.innerHTML = `
-    <div class="machine">
-    ${ comps[maquinaJugada] }
-    </div>
-    ${ comps[miJugada] }
-    `;
+    if (cs.player === 1) {
+        div.innerHTML = `
+        <div class="machine">
+        ${ comps[playerTwoChoise] }
+        </div>
+        ${ comps[playerOneChoise] }
+        `;   
+    } else if(cs.player === 2) {
+        div.innerHTML = `
+        <div class="machine">
+        ${ comps[playerOneChoise] }
+        </div>
+        ${ comps[playerTwoChoise] }
+        `;
+    }
 
-    const resultOfPlay = state.whoWins(miJugada, maquinaJugada);
+
+    
     let myValue = sessionStorage.getItem("me");
-    let machineValue = sessionStorage.getItem("machine");
+    let playerTwoValue = sessionStorage.getItem("playerTwo");
+    const resultOfPlay = state.whoWins(playerOneChoise, playerTwoChoise);
     
     if (resultOfPlay == "ganaste") {
         sessionStorage.setItem("me", JSON.stringify(Number(myValue) + 1))
     } else if(resultOfPlay == "perdiste") {
-        sessionStorage.setItem("machine", JSON.stringify(Number(machineValue) + 1))
+        sessionStorage.setItem("playerTwo", JSON.stringify(Number(playerTwoValue) + 1))
     } 
     
     setTimeout(()=>{ return params.goTo(`/${resultOfPlay}`); }, 2000)

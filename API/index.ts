@@ -162,7 +162,6 @@ app.post("/play", (req,res) => {
                 const roomRef = rtdb.ref("/rooms/" + rtdbRoomId + "/playerOne");
                 roomRef.update({
                     choise: choise,
-                    name: name
                 })    
             }
             if (player == 2) {
@@ -171,7 +170,6 @@ app.post("/play", (req,res) => {
                 const roomRef = rtdb.ref("/rooms/" + rtdbRoomId + "/playerTwo");
                 roomRef.update({
                     choise: choise,
-                    name: name
                 })    
             }
         }).then(() => res.json({ message: "ok" }))

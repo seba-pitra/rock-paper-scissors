@@ -18,15 +18,11 @@ export function initPlayPage(params) {
             params.goTo("/instruction");
         }
     }
-    setTimeout(()=> { redireccionar() },7000)
     
-    function machinePlay() {
-        const options = ["piedra","papel","tijeras"]
-        const choose =  options[Math.floor(Math.random() * options.length)];
-        return choose;
-    }
+    setTimeout(()=> { redireccionar() }, 7000)
     
-    const currentState = state.getState();
+    
+    const cs = state.getState();
     const piedra:any = div.querySelector("custom-piedra");
     const papel:any = div.querySelector("custom-papel");
     const tijera:any = div.querySelector("custom-tijera");
@@ -34,39 +30,39 @@ export function initPlayPage(params) {
     tijera.addEventListener("click", (e) => {
         papel.style.opacity = "0.4";
         piedra.style.opacity = "0.4";
+        tijera.style.height
         
-        currentState.currentGame.computerPlay = machinePlay(); 
-        currentState.currentGame.myPlay = "tijeras";
-        state.setState(currentState);
-        setTimeout(() => {
-            params.goTo("/choose")
-        }, 2000)
+        state.setPlay({ player: cs.player, choise:"tijeras" })
+        .then(() => {
+            setTimeout(() => {
+                params.goTo("/choose")
+            }, 2000)
+        })
     });
     
     piedra.addEventListener("click", (e) => {
         papel.style.opacity = "0.4";
         tijera.style.opacity = "0.4";
 
-        currentState.currentGame.computerPlay = machinePlay(); 
-        currentState.currentGame.myPlay = "piedra";
-        state.setState(currentState);
-
-        setTimeout(() => {
-            return params.goTo("/choose")
-        }, 2000)
+        state.setPlay({ player: cs.player, choise:"piedra" })
+        .then( () => {
+            setTimeout(() => {
+                params.goTo("/choose")
+            }, 2000)
+        })
     });
 
     papel.addEventListener("click", (e) => {
         piedra.style.opacity = "0.4";
         tijera.style.opacity = "0.4";
 
-        currentState.currentGame.computerPlay = machinePlay(); 
-        currentState.currentGame.myPlay = "papel";
-        state.setState(currentState);
 
-        setTimeout(() => {
-            return params.goTo("/choose")
-        }, 2000)
+        state.setPlay({ player: cs.player, choise:"papel" })
+        .then(() => {
+            setTimeout(() => {
+                params.goTo("/choose")
+            }, 2000)
+        })
     })
         
     return div;
