@@ -2,7 +2,6 @@ import * as express from "express";
 import { firestore,rtdb } from "./db";
 import * as cors from "cors"
 import { v4 as uuidv4} from "uuid"
-import { userController } from "./controllers/user-controllers";
 
 const port = process.env.PORT || 3000
 const app = express();

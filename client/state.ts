@@ -46,8 +46,6 @@ export const state = {
             const {rtdbRoom} = data;
             cs.rtdbRoomId = rtdbRoom;
             this.setState(cs)
-            console.log("paso por getRtdbRoomId()");
-            
         })
     },
     getState() {
@@ -59,7 +57,6 @@ export const state = {
             cb();  
         }        
         localStorage.setItem("state", JSON.stringify(newState))
-        console.log("soy el state,cambié",this.getState());
     },
     suscribe(cb: (any) => any) {
         this.listeners.push(cb);
