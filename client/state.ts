@@ -15,13 +15,9 @@ export const state = {
         rtdbRoomId: "",
         roomId: "",
         player: "",
-        // currentGame: {
-        //     playerTwoPlay:"",
-        //     myPlay:""
-        // },
         history: {
-            playerTwoPlay: 0,
-            myPlay: 0
+            playerOne: 0,
+            playerTwo: 0
         }
     },
     listeners:[],

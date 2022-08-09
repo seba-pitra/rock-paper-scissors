@@ -11,8 +11,8 @@ export function initPerdistePage(params) {
     <img src="${imagen}">
     <div class="score-container">
     <custom-text>Score</custom-text>
-    <custom-text class="results">Vos: ${sessionStorage.getItem("me")}</custom-text>
-    <custom-text class="results">Máquina: ${sessionStorage.getItem("machine")}</custom-text>
+    <custom-text class="results">Vos: ${sessionStorage.getItem("playerOne")}</custom-text>
+    <custom-text class="results">Máquina: ${sessionStorage.getItem("playerTwo")}</custom-text>
     </div>
     <custom-boton>Volver a jugar</custom-boton>
     `

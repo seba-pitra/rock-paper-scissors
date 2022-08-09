@@ -2,11 +2,12 @@ import { state} from "../../state"
 const imagen = require("url:../../images/win.png")
 
 export function pageGanaste(params) {
-    const currentState = state.getState();
-    currentState.history.myPlay = currentState.history.myPlay + 1;
+    const cs = state.getState();
+    const playerOneName = cs.rtdbData.playerOne.name;
+    const playerTwoName = cs.rtdbData.playerTwo.name
 
-    const myValue = sessionStorage.getItem("me");
-    const machineValue = sessionStorage.getItem("machine");
+    const playerOneValue = cs.history.playerOne;
+    const playerTwoValue = cs.history.playerTwo;
     
     const div = document.createElement("div")
     div.className = "contaner-result"
@@ -14,8 +15,8 @@ export function pageGanaste(params) {
     <img src="${imagen}">
     <div class="score-container">
     <custom-text>Score</custom-text>
-    <custom-text class="results">Vos: ${myValue}</custom-text>
-    <custom-text class="results">Máquina: ${machineValue}</custom-text>
+    <custom-text class="results">${playerOneName}: ${playerOneValue}</custom-text>
+    <custom-text class="results">${playerTwoName}: ${playerTwoValue}</custom-text>
     </div>
     <custom-boton>Volver a jugar</custom-boton>
     `
