@@ -2,6 +2,7 @@ import express from "express";
 import { firestore,rtdb } from "./db";
 import * as cors from "cors"
 import { v4 as uuidv4} from "uuid"
+import path from "path";
 
 const port = process.env.PORT || 3000
 const app = express();
@@ -170,3 +171,7 @@ app.post("/play", (req,res) => {
 app.listen(port, () => {
     console.log("El puerto funciona en el numero:" + port);
 })
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../dist/index.html"));
+});
