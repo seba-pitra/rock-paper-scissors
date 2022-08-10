@@ -3,7 +3,8 @@
         "target": "ESNext",
         "moduleResolution": "node",
         "resolveJsonModule": true,
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "module": "CommonJS"
     },
     "files": ["./API/index.ts"]
 }
