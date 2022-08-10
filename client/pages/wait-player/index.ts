@@ -25,7 +25,7 @@ export function initWaitPlayer(params) {
       const playerTwoReady = rtdbData.playerTwo.online
 
       if (playerOneReady && playerTwoReady) {
-         params.goTo("./instructions")
+         params.goTo("/instructions")
          clearInterval(interval)
       }   
    }, 1000)
