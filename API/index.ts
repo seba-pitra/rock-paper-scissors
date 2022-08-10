@@ -1,6 +1,6 @@
 import express from "express";
 import { firestore,rtdb } from "./db";
-import * as cors from "cors"
+import cors from "cors";
 import { v4 as uuidv4} from "uuid"
 import path from "path";
 

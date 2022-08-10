@@ -6,7 +6,9 @@
   "author": "Seba <seeba5024@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@types/cors": "^2.8.12",
     "@types/node": "^18.6.5",
+    "@types/uuid": "^8.3.4",
     "cors": "^2.8.5",
     "express": "^4.18.1",
     "firebase": "8.7.1",
@@ -19,7 +21,7 @@
   },
   "scripts": {
     "dev:front": "parcel serve ./client/index.html",
-    "dev:api": "node ./API/index.js",
+    "dev:api": "nodemon ./API/index.ts",
     "build:front": "parcel build ./client/index.html",
     "build:api": "tsc",
     "build": "yarn build:front && yarn build:api",
