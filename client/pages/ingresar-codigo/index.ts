@@ -32,16 +32,6 @@ export function initGetInSala(params) {
         state.getRtdbRoomId()
         .then(() => {
          params.goTo("/get-name")
-         //  state.listenRoom()
-         //  setTimeout(() => {
-         //    if (cs.rtdbData.playerOne && cs.rtdbData.playerTwo) {
-         //      return alert("La sala está completa")
-         //    } 
-         //    else {
-         //      state.accessToRoom(codigo)
-         //      .then(() => params.goTo("/get-name"))
-         //    }
-         //  }, 2000)
        })
       }
     })

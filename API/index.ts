@@ -1,4 +1,5 @@
-import * as express from "express";
+// import * as express from "express";
+const express = require("express")
 import { firestore,rtdb } from "./db";
 import * as cors from "cors"
 import { v4 as uuidv4} from "uuid"
@@ -11,7 +12,7 @@ const roomsCollection = firestore.collection("rooms")
 
 app.use(cors())
 app.use(express.json()) 
-app.use(express.static("dist"))
+app.use(express.static("../client/dist"))
 
 app.post('/signup', async (req, res) => {
     const {nombre} = req.body

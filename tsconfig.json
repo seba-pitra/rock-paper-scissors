@@ -2,6 +2,8 @@
     "compilerOptions": {
         "target": "ESNext",
         "moduleResolution": "node",
-        "resolveJsonModule": true
-    }, 
+        "resolveJsonModule": true,
+        "esModuleInterop": true
+    },
+    "files": ["./API/index.ts"]
 }

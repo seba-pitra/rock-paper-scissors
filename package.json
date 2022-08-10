@@ -1,10 +1,12 @@
 {
   "name": "dwf-m6-desafio",
   "version": "1.0.0",
+  "type": "module",
   "repository": "git@github.com:seba-pitra/dwf-m6-desafio.git",
   "author": "Seba <seeba5024@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@types/node": "^18.6.5",
     "cors": "^2.8.5",
     "express": "^4.18.1",
     "firebase": "8.7.1",
@@ -16,11 +18,11 @@
   },
   "scripts": {
     "dev:front": "parcel serve ./client/index.html",
-    "dev:api": "nodemon ./API/index.ts",
+    "dev:api": "node ./API/index.js",
     "build:front": "parcel build ./client/index.html",
-    "build:api": "tsc ./API/index.ts",
+    "build:api": "tsc",
     "build": "yarn build:front && yarn build:api",
-    "start": "node index.js"
+    "start": "node ./API/index.js"
   },
   "devDependencies": {
     "process": "^0.11.10"
