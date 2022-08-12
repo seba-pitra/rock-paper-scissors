@@ -45,18 +45,33 @@ export function initGetName(params) {
          state.getRtdbRoomId()
          state.listenRoom()
 
+//10310
          setTimeout(() => {
-            if (cs.rtdbData.playerOne && cs.rtdbData.playerTwo ||
-               cs.rtdbData.playerOne.name === nombre) {
-               return alert("La sala está completa o tu nombre ya esta en uso")
-            }  else {
-              state.accessToRoom(cs.roomId)
-              state.setStatus({ player:2, online: true, start:false, name:nombre})
-              .then(() => {
-                 state.listenRoom()
-                 params.goTo("/instructions")
-              })
+            if(!cs.rtdbData.playerTwo){
+               state.accessToRoom(cs.roomId)
+               .then(() => state.setStatus({ player:2, online: true, start:false, name:nombre}))
+               .then(() => {
+                  state.listenRoom()
+                  params.goTo("/instructions")
+               })
+             }
+
+
+            if (cs.rtdbData.playerOne && cs.rtdbData.playerTwo &&
+               cs.rtdbData.playerOne.name !== nombre && cs.rtdbData.playerTwo.name !== nombre) {
+               return alert("La sala está completa o tu nombre está mal")
+            } 
+            else if(cs.rtdbData.playerOne.name === nombre) {
+               cs.player = 1;
+               state.setName(1, nombre)
+               state.setStatus({ player:1, online: true, start:false, name:nombre})
+               .then(() => params.goTo("/instructions"))
             }
+            else if(cs.rtdbData.playerTwo.name === nombre) {
+               state.setName(2, nombre)
+               state.setStatus({ player:2, online: true, start:false, name:nombre})
+               .then(() => params.goTo("/instructions"))
+            } 
          }, 2000)
       }
    })

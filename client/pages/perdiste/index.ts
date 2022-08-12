@@ -9,6 +9,8 @@ export function initPerdistePage(params) {
     const playerOneValue = cs.rtdbData.playerOne.history;
     const playerTwoValue = cs.rtdbData.playerTwo.history;
 
+    
+
     const div = document.createElement("div");
     div.className = "contaner-result"
     div.innerHTML = `

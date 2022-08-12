@@ -56,6 +56,8 @@ export const state = {
         for (const cb of this.listeners) {
             cb();  
         }        
+        console.log("soy el state, cambie: ", this.getState());
+        
         localStorage.setItem("state", JSON.stringify(newState))
     },
     suscribe(cb: (any) => any) {

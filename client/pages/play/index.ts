@@ -15,11 +15,18 @@ export function initPlayPage(params) {
     
     function redireccionar() {
         if (location.pathname === "/play") {
-            params.goTo("/instruction");
+            if (cs.player === 1) {
+                state.setStatus({ player: 1, online: true, start: false, name: cs.playerName })
+                .then(() => params.goTo("/instruction"))
+             } 
+             if (cs.player === 2) {
+                state.setStatus({ player: 2, online: true, start: false, name: cs.playerTwoName })
+                .then(() => params.goTo("/instruction"))
+             }
         }
     }
     
-    setTimeout(()=> { redireccionar() }, 7000)
+    setTimeout(()=> { redireccionar() }, 6000)
     
     
     const cs = state.getState();
@@ -30,7 +37,6 @@ export function initPlayPage(params) {
     tijera.addEventListener("click", (e) => {
         papel.style.opacity = "0.4";
         piedra.style.opacity = "0.4";
-        tijera.style.height
         
         state.setPlay({ player: cs.player, choise:"tijeras" })
         .then(() => {

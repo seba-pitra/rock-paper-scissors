@@ -49,7 +49,7 @@ export function initWaitRoom(params) {
             .then(() => params.goTo("/instruction"))
          } 
          if (cs.player === 2) {
-            state.setStatus({ player: 2, online: true, start: false, name: cs.playerName })
+            state.setStatus({ player: 2, online: true, start: false, name: cs.playerTwoName })
             .then(() => params.goTo("/instruction"))
          } 
       }
