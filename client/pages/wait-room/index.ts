@@ -40,6 +40,22 @@ export function initWaitRoom(params) {
          clearInterval(interval)
        } 
     }, 1000)
+
     
-    return div;
+    function redireccionar() {
+      if (location.pathname === "/wait-room") {
+         if (cs.player === 1) {
+            state.setStatus({ player: 1, online: true, start: false, name: cs.playerName })
+            .then(() => params.goTo("/instruction"))
+         } 
+         if (cs.player === 2) {
+            state.setStatus({ player: 2, online: true, start: false, name: cs.playerName })
+            .then(() => params.goTo("/instruction"))
+         } 
+      }
+  }
+
+   setTimeout(()=> { redireccionar() }, 7000)
+    
+   return div;
 }
