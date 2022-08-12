@@ -18,12 +18,11 @@ export function initGetInSala(params) {
     `
 
     const secondButton:any = div.querySelector(".get-in");
-    
-    
+
     state.listenRoom()
     secondButton.addEventListener("click", (e) => {
       e.preventDefault()
-      const codigo = div.querySelector("input").value
+      const codigo = div.querySelector("input")?.value
       if(codigo) {
         const cs = state.getState();
         cs.roomId = codigo
@@ -35,9 +34,6 @@ export function initGetInSala(params) {
        })
       }
     })
-    sessionStorage.setItem("me", "0")
-    sessionStorage.setItem("machine", "0")
-
 
     return div;
 }

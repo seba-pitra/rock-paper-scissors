@@ -29,8 +29,6 @@ export function initInstrucionsPage(params) {
         state.setStatus({player:2, online:true, start:true, name:cs.playerTwoName})
         .then( ()=> params.goTo("/wait-room"))
       }
-
-      // params.goTo("/wait-room")
     })
     
     return div;

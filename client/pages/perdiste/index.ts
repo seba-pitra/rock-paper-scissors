@@ -6,8 +6,8 @@ export function initPerdistePage(params) {
     const playerOneName = cs.rtdbData.playerOne.name;
     const playerTwoName = cs.rtdbData.playerTwo.name
 
-    const playerOneValue = cs.history.playerOne;
-    const playerTwoValue = cs.history.playerTwo;
+    const playerOneValue = cs.rtdbData.playerOne.history;
+    const playerTwoValue = cs.rtdbData.playerTwo.history;
 
     const div = document.createElement("div");
     div.className = "contaner-result"
@@ -31,5 +31,6 @@ export function initPerdistePage(params) {
     button?.addEventListener("click", (e) => {
         params.goTo("/instruction")
     })
+    
     return div
 }

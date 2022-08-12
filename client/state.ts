@@ -56,6 +56,8 @@ export const state = {
         for (const cb of this.listeners) {
             cb();  
         }        
+        console.log("soy el state, he cambiado",this.getState());
+        
         localStorage.setItem("state", JSON.stringify(newState))
     },
     suscribe(cb: (any) => any) {
@@ -151,5 +153,32 @@ export const state = {
                 choise: params.choise,
             })
         })
-    },
+    },    
+    setHistory() {
+        const cs = this.getState();
+        const playerOneHistory = cs.history.playerOne;
+        const playerTwoHistory = cs.history.playerTwo
+        
+        if(cs.player == 1) {
+            return fetch(API_BASE_URL + "/history", {
+                method: "post",
+                headers: { 'content-type': "application/json" },
+                body: JSON.stringify({
+                    rtdbRoomId: cs.rtdbRoomId,
+                    victories: playerOneHistory,
+                    player: cs.player
+                })
+            })
+        } else {
+            return fetch(API_BASE_URL + "/history", {
+                method: "post",
+                headers: { 'content-type': "application/json" },
+                body: JSON.stringify({
+                    rtdbRoomId: cs.rtdbRoomId,
+                    victories: playerTwoHistory,
+                    player: cs.player
+                })
+            })
+        }
+    }
 }

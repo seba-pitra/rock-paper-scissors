@@ -31,33 +31,47 @@ export function initPageJugada(params) {
     }
     
     const resultOfPlay = state.whoWins(playerOneChoise, playerTwoChoise);
+    console.log("REsultado: "), resultOfPlay;
+    
     
     if (resultOfPlay === "ganaste" && cs.player === 1) {
         cs.history.playerOne = cs.history.playerOne + 1;
         state.setState(cs)
-        setTimeout(()=> params.goTo(`/ganaste`) , 2000)
+        state.setHistory()
+        .then(() => {
+            setTimeout(() => params.goTo(`/ganaste`), 2000)
+        })
 
     } else if(resultOfPlay === "perdiste" && cs.player === 1) {
         cs.history.playerTwo =cs.history.playerTwo + 1;
         state.setState(cs)
-        setTimeout(() => params.goTo(`/perdiste`) , 2000)
+        state.setHistory()
+        .then(() => {
+            setTimeout(() => params.goTo(`/perdiste`), 2000)
+        })
 
     } else if(resultOfPlay === "empate" && cs.player === 1) {
-        setTimeout(() => params.goTo(`/empate`) , 2000)
+        setTimeout(() => params.goTo(`/empate`), 2000)
     }
 
     if (resultOfPlay === "ganaste" && cs.player === 2) {
         cs.history.playerOne = cs.history.playerOne + 1;
         state.setState(cs)
-        setTimeout(() => params.goTo(`/perdiste`) , 2000)
+        state.setHistory()
+        .then(() => {
+            setTimeout(() => params.goTo(`/perdiste`), 2000)
+        })
         
     } else if(resultOfPlay === "perdiste" && cs.player === 2) {
         cs.history.playerTwo = cs.history.playerTwo + 1;
         state.setState(cs)
-        setTimeout(() => params.goTo(`/ganaste`) , 2000)
+        state.setHistory()
+        .then(() => {
+            setTimeout(() => params.goTo(`/ganaste`), 2000)
+        })
 
     } else if(resultOfPlay === "empate" && cs.player === 2) {
-        setTimeout(() => params.goTo(`/empate`) , 2000)
+        setTimeout(() => params.goTo(`/empate`), 2000)
     }
     
     return div;

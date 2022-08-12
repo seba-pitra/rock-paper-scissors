@@ -168,6 +168,25 @@ app.post("/play", (req,res) => {
         }).then(() => res.json({ message: "ok" }))
 })
 
+app.post("/history", (req, res) => {
+    const {rtdbRoomId} = req.body;
+    const {player} = req.body;
+    const {victories} = req.body
+
+    if (player == 1) {
+        const roomRef = rtdb.ref("/rooms/" + rtdbRoomId + "/playerOne");
+        roomRef.update({
+            history: victories,
+        }).then(() => res.json({ message: "ok" }))
+    }
+    if (player == 2) {
+        const roomRef = rtdb.ref("/rooms/" + rtdbRoomId + "/playerTwo");
+        roomRef.update({
+            history: victories,
+        }).then(() => res.json({ message: "ok" }))    
+    }
+})
+
 app.listen(port, () => {
     console.log("El puerto funciona en el numero:" + port);
 })
