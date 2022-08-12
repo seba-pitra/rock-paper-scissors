@@ -31,8 +31,6 @@ export function initPageJugada(params) {
     }
     
     const resultOfPlay = state.whoWins(playerOneChoise, playerTwoChoise);
-    console.log("REsultado: "), resultOfPlay;
-    
     
     if (resultOfPlay === "ganaste" && cs.player === 1) {
         cs.history.playerOne = cs.history.playerOne + 1;
