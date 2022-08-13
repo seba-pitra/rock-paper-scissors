@@ -56,18 +56,20 @@ export function initGetName(params) {
                })
              }
 
-
+             
             if (cs.rtdbData.playerOne && cs.rtdbData.playerTwo &&
                cs.rtdbData.playerOne.name !== nombre && cs.rtdbData.playerTwo.name !== nombre) {
                return alert("La sala está completa o tu nombre está mal")
             } 
             else if(cs.rtdbData.playerOne.name === nombre) {
                cs.player = 1;
+               cs.playerTwoName = cs.rtdbData.playerTwo.name
                state.setName(1, nombre)
                state.setStatus({ player:1, online: true, start:false, name:nombre})
                .then(() => params.goTo("/instructions"))
             }
             else if(cs.rtdbData.playerTwo.name === nombre) {
+               cs.playerName = cs.rtdbData.playerOne.name
                state.setName(2, nombre)
                state.setStatus({ player:2, online: true, start:false, name:nombre})
                .then(() => params.goTo("/instructions"))

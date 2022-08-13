@@ -4,7 +4,8 @@ import { json } from "express";
 
 type Jugada = "piedra" |"papel" | "tijeras";
 
-const API_BASE_URL = "https://piedra-papel-tijeras-juego.herokuapp.com";
+// const API_BASE_URL = "https://piedra-papel-tijeras-juego.herokuapp.com";
+const API_BASE_URL = "http://localhost:3000";
 
 export const state = {
     data:{
@@ -55,7 +56,9 @@ export const state = {
         this.data = newState;
         for (const cb of this.listeners) {
             cb();  
-        }        
+        }
+        // console.log("soy el state, cambié", this.getState());
+        
         localStorage.setItem("state", JSON.stringify(newState))
     },
     suscribe(cb: (any) => any) {
@@ -152,31 +155,18 @@ export const state = {
             })
         })
     },    
-    setHistory() {
-        const cs = this.getState();
-        const playerOneHistory = cs.history.playerOne;
-        const playerTwoHistory = cs.history.playerTwo
+    setHistory(victories, player) {
+        const cs = this.getState()
         
-        if(cs.player == 1) {
-            return fetch(API_BASE_URL + "/history", {
-                method: "post",
-                headers: { 'content-type': "application/json" },
-                body: JSON.stringify({
-                    rtdbRoomId: cs.rtdbRoomId,
-                    victories: playerOneHistory,
-                    player: cs.player
-                })
+        return fetch(API_BASE_URL + "/history", {
+            method: "post",
+            headers: { 'content-type': "application/json" },
+            body: JSON.stringify({
+                rtdbRoomId: cs.rtdbRoomId,
+                victories,
+                player,
             })
-        } else {
-            return fetch(API_BASE_URL + "/history", {
-                method: "post",
-                headers: { 'content-type': "application/json" },
-                body: JSON.stringify({
-                    rtdbRoomId: cs.rtdbRoomId,
-                    victories: playerTwoHistory,
-                    player: cs.player
-                })
-            })
-        }
+        })
     }
 }
+//13648
