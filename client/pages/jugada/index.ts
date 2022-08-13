@@ -45,7 +45,7 @@ export function initPageJugada(params) {
 
         state.setHistory(victories, 2)
         .then(()=>{
-            setTimeout(() => cs.player === 1 ? params.goTo(`/ganaste`) : params.goTo(`/perdiste`), 2000)
+            setTimeout(() => cs.player === 1 ? params.goTo(`/perdiste`) : params.goTo(`/ganaste`), 2000)
         })
     } else if(resultOfPlay === "empate") {
         setTimeout(() => params.goTo(`/empate`), 2000)
