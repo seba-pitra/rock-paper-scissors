@@ -42,7 +42,7 @@ export function initPlayPage(params) {
         .then(() => {
             setTimeout(() => {
                 params.goTo("/choose")
-            }, 2000)
+            }, 3000)
         })
     });
     
@@ -54,7 +54,7 @@ export function initPlayPage(params) {
         .then( () => {
             setTimeout(() => {
                 params.goTo("/choose")
-            }, 2000)
+            }, 3000)
         })
     });
 
@@ -67,7 +67,7 @@ export function initPlayPage(params) {
         .then(() => {
             setTimeout(() => {
                 params.goTo("/choose")
-            }, 2000)
+            }, 3000)
         })
     })
         

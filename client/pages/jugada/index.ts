@@ -6,8 +6,8 @@ export function initPageJugada(params) {
     const div = document.createElement("div");
     div.className = "jugada-container"
     
-    const playerOneChoise = cs.rtdbData.playerOne.choise
-    const playerTwoChoise = cs.rtdbData.playerTwo.choise
+    const playerOneChoise = cs.rtdbData.playerOne.choise || "undefined"
+    const playerTwoChoise = cs.rtdbData.playerTwo.choise || "undefined"
 
     const comps = {
         piedra: "<custom-piedra></custom-piedra>",
@@ -30,26 +30,36 @@ export function initPageJugada(params) {
         ${ comps[playerTwoChoise] }
         `;
     }
-    
-    const resultOfPlay = state.whoWins(playerOneChoise, playerTwoChoise);
-    
-    if (resultOfPlay === "ganaste") {
-        let victories = Number(cs.rtdbData.playerOne.history + 1 || 0)
 
-        state.setHistory(victories, 1)
-        .then(()=>{
-            setTimeout(() => cs.player === 1 ? params.goTo(`/ganaste`) : params.goTo(`/perdiste`), 2000)
-        })
-    } else if(resultOfPlay === "perdiste") {
-        let victories = Number(cs.rtdbData.playerTwo.history + 1 || 0) 
-
-        state.setHistory(victories, 2)
-        .then(()=>{
-            setTimeout(() => cs.player === 1 ? params.goTo(`/perdiste`) : params.goTo(`/ganaste`), 2000)
-        })
-    } else if(resultOfPlay === "empate") {
-        setTimeout(() => params.goTo(`/empate`), 2000)
+    if(cs.player === 1 && playerTwoChoise == "undefined") {
+        state.setStatus({ player: 1, online: true, start: false, name: cs.playerName })
+        .then(() => params.goTo(`/instruction`))
     }
+    else if(cs.player === 2 && playerOneChoise == "undefined") {
+        state.setStatus({ player: 2, online: true, start: false, name: cs.playerTwoName })
+        .then(() => params.goTo(`/instruction`))
+    } else {
+        const resultOfPlay = state.whoWins(playerOneChoise, playerTwoChoise);
+        
+        if (resultOfPlay === "ganaste") {
+            let victories = Number(cs.rtdbData.playerOne.history + 1 || 0)
+            state.setHistory(victories, 1)
+            .then(()=>{
+                setTimeout(() => cs.player === 1 ? params.goTo(`/ganaste`) : params.goTo(`/perdiste`), 2000)
+            })
+        } 
+        else if(resultOfPlay === "perdiste") {
+            let victories = Number(cs.rtdbData.playerTwo.history + 1 || 0) 
+            state.setHistory(victories, 2)
+            .then(()=>{
+                setTimeout(() => cs.player === 1 ? params.goTo(`/perdiste`) : params.goTo(`/ganaste`), 2000)
+            })
+        } 
+        else if(resultOfPlay === "empate") {
+            setTimeout(() => params.goTo(`/empate`), 2000)
+        }
+    }
+    
     
     return div;
 }

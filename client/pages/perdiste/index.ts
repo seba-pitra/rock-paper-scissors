@@ -23,8 +23,10 @@ export function initPerdistePage(params) {
     
     if (cs.player === 1) {
         state.setStatus({ player: 1, online: true, start: false, name: cs.playerName })
+        .then(() => state.cleanPlay())
     } else if(cs.player === 2) {
         state.setStatus({ player: 2, online: true, start: false, name: cs.playerTwoName })
+        .then(() => state.cleanPlay())
     }
 
     const button = div.querySelector("custom-boton")

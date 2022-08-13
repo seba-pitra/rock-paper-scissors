@@ -18,7 +18,8 @@ export function initInstrucionsPage(params) {
     `
 
     const button:any = div.querySelector("custom-boton");
-
+    
+    state.cleanPlay()
     button.addEventListener("click",async (e) => {
       e.preventDefault()
 
