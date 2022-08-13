@@ -57,7 +57,7 @@ export const state = {
         for (const cb of this.listeners) {
             cb();  
         }
-        // console.log("soy el state, cambié", this.getState());
+        console.log("soy el state, cambié", this.getState());
         
         localStorage.setItem("state", JSON.stringify(newState))
     },

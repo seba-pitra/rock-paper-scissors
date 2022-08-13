@@ -45,19 +45,17 @@ export function initGetName(params) {
          state.getRtdbRoomId()
          state.listenRoom()
 
-//10310
          setTimeout(() => {
             if(!cs.rtdbData.playerTwo){
+               cs.playerName = cs.rtdbData.playerOne.name
                state.accessToRoom(cs.roomId)
                .then(() => state.setStatus({ player:2, online: true, start:false, name:nombre}))
                .then(() => {
                   state.listenRoom()
                   params.goTo("/instructions")
                })
-             }
-
-             
-            if (cs.rtdbData.playerOne && cs.rtdbData.playerTwo &&
+            } 
+            else if (cs.rtdbData.playerOne && cs.rtdbData.playerTwo &&
                cs.rtdbData.playerOne.name !== nombre && cs.rtdbData.playerTwo.name !== nombre) {
                return alert("La sala está completa o tu nombre está mal")
             } 
