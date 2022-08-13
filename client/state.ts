@@ -177,14 +177,3 @@ export const state = {
         })
     }
 }
-
-
-
-
-
-
-//Cuando un jugador elige y el otro no, el que no eligio le muestra al que si eligio q su eleccion fue "undefined".
-//Estoy pensando en construir una condicional que si uno de los jugadores no eligió nada vuelva a la pagina de "instructions"
-//cambiando el state y borrando las choises de cada uno asi no se aparecen cuando no eligen.
-
-//Tambien buscar esa manera de borrar las choises. Tengo que ver la forma de borrar de la base de datos esa eleccion

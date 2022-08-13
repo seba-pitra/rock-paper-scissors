@@ -26,7 +26,7 @@ export function initPlayPage(params) {
         }
     }
     
-    setTimeout(()=> { redireccionar() }, 6000)
+    setTimeout(()=> { redireccionar() }, 15000)
     
     
     const cs = state.getState();
@@ -41,8 +41,11 @@ export function initPlayPage(params) {
         state.setPlay({ player: cs.player, choise:"tijeras" })
         .then(() => {
             setTimeout(() => {
-                params.goTo("/choose")
-            }, 3000)
+                state.setStatus({ player: 1, online: true, start: false, name: cs.playerName })
+                state.setStatus({ player: 2, online: true, start: false, name: cs.playerTwoName })
+                .then(()=> params.goTo("/choose"))
+                // params.goTo("/choose")
+            }, 6000)
         })
     });
     
@@ -53,8 +56,11 @@ export function initPlayPage(params) {
         state.setPlay({ player: cs.player, choise:"piedra" })
         .then( () => {
             setTimeout(() => {
-                params.goTo("/choose")
-            }, 3000)
+                state.setStatus({ player: 1, online: true, start: false, name: cs.playerName })
+                state.setStatus({ player: 2, online: true, start: false, name: cs.playerTwoName })
+                .then(()=> params.goTo("/choose"))
+                // params.goTo("/choose")
+            }, 6000)
         })
     });
 
@@ -66,8 +72,11 @@ export function initPlayPage(params) {
         state.setPlay({ player: cs.player, choise:"papel" })
         .then(() => {
             setTimeout(() => {
-                params.goTo("/choose")
-            }, 3000)
+                state.setStatus({ player: 1, online: true, start: false, name: cs.playerName })
+                state.setStatus({ player: 2, online: true, start: false, name: cs.playerTwoName })
+                .then(()=> params.goTo("/choose"))
+                // params.goTo("/choose")
+            }, 6000)
         })
     })
         

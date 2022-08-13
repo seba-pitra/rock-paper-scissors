@@ -45,14 +45,14 @@ export function initPageJugada(params) {
             let victories = Number(cs.rtdbData.playerOne.history + 1 || 0)
             state.setHistory(victories, 1)
             .then(()=>{
-                setTimeout(() => cs.player === 1 ? params.goTo(`/ganaste`) : params.goTo(`/perdiste`), 2000)
+                setTimeout(() => cs.player === 1 ? params.goTo(`/ganaste`) : params.goTo(`/perdiste`), 3000)
             })
         } 
         else if(resultOfPlay === "perdiste") {
             let victories = Number(cs.rtdbData.playerTwo.history + 1 || 0) 
             state.setHistory(victories, 2)
             .then(()=>{
-                setTimeout(() => cs.player === 1 ? params.goTo(`/perdiste`) : params.goTo(`/ganaste`), 2000)
+                setTimeout(() => cs.player === 1 ? params.goTo(`/perdiste`) : params.goTo(`/ganaste`), 3000)
             })
         } 
         else if(resultOfPlay === "empate") {
