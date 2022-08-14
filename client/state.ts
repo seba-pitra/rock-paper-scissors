@@ -4,8 +4,7 @@ import { json } from "express";
 
 type Jugada = "piedra" |"papel" | "tijeras"; 
 
-// const API_BASE_URL = "https://piedra-papel-tijeras-juego.herokuapp.com";
-const API_BASE_URL = "http://localhost:3000";
+const API_BASE_URL = "https://piedra-papel-tijeras-juego.herokuapp.com";
 
 export const state = {
     data:{
