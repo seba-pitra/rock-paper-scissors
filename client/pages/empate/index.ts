@@ -3,11 +3,14 @@ import { state } from "../../state"
 export function initEmpatePage(params) {
     const cs:any = state.getState()
 
-    const playerOneName = cs.rtdbData.playerOne.name;
-    const playerTwoName = cs.rtdbData.playerTwo.name
+    const playerOneName = cs.playerName;
+    const playerTwoName = cs.playerTwoName;
     
     let playerOneValue = cs.rtdbData.playerOne.history || 0;
     let playerTwoValue = cs.rtdbData.playerTwo.history || 0;
+
+    console.log("history 1:", playerOneValue);
+    console.log("history 2:", playerTwoValue);
     
     const div = document.createElement("div")
     div.className = "contaner-result"

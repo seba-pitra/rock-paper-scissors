@@ -38,25 +38,29 @@ export function initPageJugada(params) {
     else if(cs.player === 2 && playerOneChoise == "undefined") {
         state.setStatus({ player: 2, online: true, start: false, name: cs.playerTwoName })
         .then(() => params.goTo(`/instruction`))
-    } else {
+    } 
+    else {
+        state.listenRoom()
         const resultOfPlay = state.whoWins(playerOneChoise, playerTwoChoise);
         
-        if (resultOfPlay === "ganaste") {
+        if (resultOfPlay === "ganaste" && cs.player === 1) {
             let victories = Number(cs.rtdbData.playerOne.history + 1 || 0)
             state.setHistory(victories, 1)
-            .then(()=>{
-                setTimeout(() => cs.player === 1 ? params.goTo(`/ganaste`) : params.goTo(`/perdiste`), 3000)
-            })
+            .then(() => setTimeout(() => params.goTo(`/ganaste`), 3000))
         } 
-        else if(resultOfPlay === "perdiste") {
+        else if(resultOfPlay === "perdiste" && cs.player === 1) {
             let victories = Number(cs.rtdbData.playerTwo.history + 1 || 0) 
             state.setHistory(victories, 2)
-            .then(()=>{
-                setTimeout(() => cs.player === 1 ? params.goTo(`/perdiste`) : params.goTo(`/ganaste`), 3000)
-            })
+            .then(() => setTimeout(() => params.goTo(`/perdiste`), 3000))
         } 
         else if(resultOfPlay === "empate") {
             setTimeout(() => params.goTo(`/empate`), 2000)
+        }
+        else if(resultOfPlay === "ganaste" && cs.player === 2){
+            setTimeout(() => params.goTo(`/ganaste`), 3500)
+        }
+        else if(resultOfPlay === "perdiste" && cs.player === 2) {
+            setTimeout(() => params.goTo(`/perdiste`), 3500)
         }
     }
     

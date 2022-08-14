@@ -2,9 +2,10 @@ import {rtdb} from "../API/rtdb"
 import map from "lodash/map"
 import { json } from "express";
 
-type Jugada = "piedra" |"papel" | "tijeras";
+type Jugada = "piedra" |"papel" | "tijeras"; 
 
-const API_BASE_URL = "https://piedra-papel-tijeras-juego.herokuapp.com";
+// const API_BASE_URL = "https://piedra-papel-tijeras-juego.herokuapp.com";
+const API_BASE_URL = "http://localhost:3000";
 
 export const state = {
     data:{
@@ -56,6 +57,7 @@ export const state = {
         for (const cb of this.listeners) {
             cb();  
         }
+        
         localStorage.setItem("state", JSON.stringify(newState))
     },
     suscribe(cb: (any) => any) {
@@ -125,7 +127,7 @@ export const state = {
         })
         .then(res => res.json())
     },
-    setStatus(params:{ player:number, online?:boolean, start:boolean, name?:string }) {
+    setStatus(params:{ player:number, online?:boolean, start:boolean, name?:string}) {
         const cs = this.getState();
         
         return fetch(API_BASE_URL + "/status", {
@@ -152,8 +154,10 @@ export const state = {
             })
         })
     },    
-    setHistory(victories, player) {
+    setHistory(victories:number, player:number) {
         const cs = this.getState()
+
+        console.log("me llega esto a la funcion:", victories);
         
         return fetch(API_BASE_URL + "/history", {
             method: "post",

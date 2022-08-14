@@ -180,6 +180,24 @@ app.post("/history", (req, res) => {
         }).then(() => res.json({ message: "ok" }));
     }
 });
+app.put("/clean-play", (req, res) => {
+    const { rtdbRoomId } = req.body;
+    const { player } = req.body;
+    if (player == 1) {
+        const roomRef = db_1.rtdb.ref("/rooms/" + rtdbRoomId + "/playerOne");
+        roomRef.update({
+            choise: "undefined"
+        })
+            .then(() => res.json({ message: "ok" }));
+    }
+    if (player == 2) {
+        const roomRef = db_1.rtdb.ref("/rooms/" + rtdbRoomId + "/playerTwo");
+        roomRef.update({
+            choise: "undefined"
+        })
+            .then(() => res.json({ message: "ok" }));
+    }
+});
 app.listen(port, () => {
     console.log("El puerto funciona en el numero:" + port);
 });

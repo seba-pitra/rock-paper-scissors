@@ -1,3 +1,4 @@
+import { stat } from "fs";
 import { state } from "../../state";
 
 export function initInstrucionsPage(params) {
@@ -20,10 +21,12 @@ export function initInstrucionsPage(params) {
     const button:any = div.querySelector("custom-boton");
     
     state.cleanPlay()
+    state.setState(cs)
     button.addEventListener("click",async (e) => {
       e.preventDefault()
 
       if (cs.player === 1) {
+        cs.playerTwoName = cs.rtdbData.playerTwo.name
         state.setStatus({player:1, online:true, start:true, name:cs.playerName})
         .then( ()=> params.goTo("/wait-room"))
       } else if(cs.player === 2) {

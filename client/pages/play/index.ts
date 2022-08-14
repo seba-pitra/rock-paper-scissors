@@ -44,7 +44,6 @@ export function initPlayPage(params) {
                 state.setStatus({ player: 1, online: true, start: false, name: cs.playerName })
                 state.setStatus({ player: 2, online: true, start: false, name: cs.playerTwoName })
                 .then(()=> params.goTo("/choose"))
-                // params.goTo("/choose")
             }, 6000)
         })
     });
@@ -59,7 +58,6 @@ export function initPlayPage(params) {
                 state.setStatus({ player: 1, online: true, start: false, name: cs.playerName })
                 state.setStatus({ player: 2, online: true, start: false, name: cs.playerTwoName })
                 .then(()=> params.goTo("/choose"))
-                // params.goTo("/choose")
             }, 6000)
         })
     });
@@ -75,7 +73,6 @@ export function initPlayPage(params) {
                 state.setStatus({ player: 1, online: true, start: false, name: cs.playerName })
                 state.setStatus({ player: 2, online: true, start: false, name: cs.playerTwoName })
                 .then(()=> params.goTo("/choose"))
-                // params.goTo("/choose")
             }, 6000)
         })
     })

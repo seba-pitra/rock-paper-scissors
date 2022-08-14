@@ -48,10 +48,10 @@ export function initGetName(params) {
          setTimeout(() => {
             if(!cs.rtdbData.playerTwo){
                cs.playerName = cs.rtdbData.playerOne.name
+               state.setName(2, nombre)
                state.accessToRoom(cs.roomId)
                .then(() => state.setStatus({ player:2, online: true, start:false, name:nombre}))
                .then(() => {
-                  state.listenRoom()
                   params.goTo("/instructions")
                })
             } 
