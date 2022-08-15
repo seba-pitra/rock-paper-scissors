@@ -52,7 +52,8 @@ export function initGetName(params) {
                state.accessToRoom(cs.roomId)
                .then(() => state.setStatus({ player:2, online: true, start:false, name:nombre}))
                .then(() => {
-                  params.goTo("/instructions")
+                  setTimeout(()=>{params.goTo("/instructions")},800)
+                  // params.goTo("/instructions")
                })
             } 
             else if (cs.rtdbData.playerOne && cs.rtdbData.playerTwo &&
