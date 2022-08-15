@@ -5,7 +5,7 @@ import { json } from "express";
 type Jugada = "piedra" |"papel" | "tijeras"; 
 
 const API_BASE_URL = "https://piedra-papel-tijeras-juego.herokuapp.com";
-
+ 
 export const state = {
     data:{
         playerName: "",
@@ -156,8 +156,6 @@ export const state = {
     setHistory(victories:number, player:number) {
         const cs = this.getState()
 
-        console.log("me llega esto a la funcion:", victories);
-        
         return fetch(API_BASE_URL + "/history", {
             method: "post",
             headers: { 'content-type': "application/json" },

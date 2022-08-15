@@ -9,9 +9,6 @@ export function initEmpatePage(params) {
     let playerOneValue = cs.rtdbData.playerOne.history || 0;
     let playerTwoValue = cs.rtdbData.playerTwo.history || 0;
 
-    console.log("history 1:", playerOneValue);
-    console.log("history 2:", playerTwoValue);
-    
     const div = document.createElement("div")
     div.className = "contaner-result"
     div.innerHTML = `

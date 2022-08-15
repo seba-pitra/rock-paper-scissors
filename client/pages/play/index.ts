@@ -1,6 +1,7 @@
 import { state } from "../../state"
 
 export function initPlayPage(params) {
+    const cs = state.getState();
     const div = document.createElement("div");
     div.className = "play-container";
     
@@ -27,9 +28,10 @@ export function initPlayPage(params) {
     }
     
     setTimeout(()=> { redireccionar() }, 15000)
+
+    if(!cs.rtdbData.playerOne.history) state.setHistory(0,1)
+    if(!cs.rtdbData.playerTwo.history) state.setHistory(0,2)
     
-    
-    const cs = state.getState();
     const piedra:any = div.querySelector("custom-piedra");
     const papel:any = div.querySelector("custom-papel");
     const tijera:any = div.querySelector("custom-tijera");

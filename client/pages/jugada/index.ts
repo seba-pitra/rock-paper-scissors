@@ -57,10 +57,10 @@ export function initPageJugada(params) {
             setTimeout(() => params.goTo(`/empate`), 2000)
         }
         else if(resultOfPlay === "ganaste" && cs.player === 2){
-            setTimeout(() => params.goTo(`/ganaste`), 3500)
+            setTimeout(() => params.goTo(`/perdiste`), 3500)
         }
         else if(resultOfPlay === "perdiste" && cs.player === 2) {
-            setTimeout(() => params.goTo(`/perdiste`), 3500)
+            setTimeout(() => params.goTo(`/ganaste`), 3500)
         }
     }
     
