@@ -29,12 +29,11 @@ export function initTextComp() {
                 }
             }            
             .body {
-                color: #000
                 font-family: 'Acme', sans serif;
                 font-size: 40px;
                 font-weight: bold;
                 text-align: center;
-                padding:20px;
+                padding: 40px 20px 20px;
             }
             @media(min-width:769px) {
                 .body {

@@ -15,7 +15,7 @@ export function pageGanaste(params) {
     div.innerHTML = `
     <img src="${imagen}">
     <div class="score-container">
-    <custom-text>Score</custom-text>
+    <span class="score-text">Score</span>
     <custom-text class="results">${playerOneName}: ${playerOneValue}</custom-text>
     <custom-text class="results">${playerTwoName}: ${playerTwoValue}</custom-text>
     </div>

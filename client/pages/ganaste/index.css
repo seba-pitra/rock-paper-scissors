@@ -10,7 +10,11 @@
     border: solid 10px;
     border-radius: 6px;
     margin-bottom: 20px;
-    font-family: 'Odibee Sans', sans-serif;
+    text-align: center;
+}
+.score-text {
+    font-size: 55px;
+    font-weight: bold;
 }
 
 .results {

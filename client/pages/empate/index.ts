@@ -14,7 +14,7 @@ export function initEmpatePage(params) {
     div.innerHTML = `
     <custom-text variant="title">¡Empate!</custom-text>
     <div class="score-container">
-    <custom-text>Score</custom-text>
+    <span class="score-text">Score</span>
     <custom-text class="results">${playerOneName}: ${playerOneValue}</custom-text>
     <custom-text class="results">${playerTwoName}: ${playerTwoValue}</custom-text>
     </div>

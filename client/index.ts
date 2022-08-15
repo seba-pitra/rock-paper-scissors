@@ -5,6 +5,7 @@ import {initTijeraComp} from "./components/tijeras";
 import { initPiedraComp } from "./components/piedra";
 import { initPapelComp } from "./components/papel";
 import { initCounterComp } from "./components/counter";
+import { initHistoryComp } from "./components/header";
 
 (function() {
     const root = document.querySelector(".root")
@@ -15,4 +16,5 @@ import { initCounterComp } from "./components/counter";
     initBotonComp();
     initTextComp();
     initCounterComp();
+    initHistoryComp();
 })()
